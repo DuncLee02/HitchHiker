@@ -1,0 +1,711 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4839628D1E28469900AD73FA /* steeringWheelIcon.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 4839628C1E28469900AD73FA /* steeringWheelIcon.jpeg */; };
+		4839628F1E2847D700AD73FA /* PassengerIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4839628E1E2847D700AD73FA /* PassengerIcon.png */; };
+		483962911E293A0A00AD73FA /* newRideMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483962901E293A0A00AD73FA /* newRideMessageViewController.swift */; };
+		489D54BA1E25FDB00049E612 /* viewRideFromTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489D54B91E25FDB00049E612 /* viewRideFromTableViewController.swift */; };
+		48B3E8BA1E2E78C300774E2B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B3E8B91E2E78C300774E2B /* SettingsViewController.swift */; };
+		48BCCEE71E26D1BA0039A43A /* checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 48BCCEE61E26D1BA0039A43A /* checked.png */; };
+		48BCCEEE1E26F7DB0039A43A /* roundTrip.png in Resources */ = {isa = PBXBuildFile; fileRef = 48BCCEED1E26F7DB0039A43A /* roundTrip.png */; };
+		48BCCEF01E26F8140039A43A /* dogIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 48BCCEEF1E26F8140039A43A /* dogIcon.png */; };
+		48BCCEF21E26F8E20039A43A /* nonsmoking.png in Resources */ = {isa = PBXBuildFile; fileRef = 48BCCEF11E26F8E20039A43A /* nonsmoking.png */; };
+		48F59E011E1FF642008B4A73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F59E001E1FF642008B4A73 /* AppDelegate.swift */; };
+		48F59E031E1FF642008B4A73 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F59E021E1FF642008B4A73 /* LoginViewController.swift */; };
+		48F59E081E1FF642008B4A73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48F59E071E1FF642008B4A73 /* Assets.xcassets */; };
+		48F59E0B1E1FF642008B4A73 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48F59E091E1FF642008B4A73 /* LaunchScreen.storyboard */; };
+		48F59E161E1FF643008B4A73 /* Urider2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F59E151E1FF643008B4A73 /* Urider2Tests.swift */; };
+		48F59E211E1FFABE008B4A73 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 48F59E201E1FFABE008B4A73 /* GoogleService-Info.plist */; };
+		48F59E2E1E20043D008B4A73 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F59E271E20043D008B4A73 /* MapViewController.swift */; };
+		48F59E2F1E20043D008B4A73 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F59E281E20043D008B4A73 /* MenuController.swift */; };
+		48F59E301E20043D008B4A73 /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F59E291E20043D008B4A73 /* NewsTableViewCell.swift */; };
+		48F59E311E20043D008B4A73 /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F59E2A1E20043D008B4A73 /* NewsTableViewController.swift */; };
+		48F59E321E20043D008B4A73 /* YourRidesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F59E2B1E20043D008B4A73 /* YourRidesViewController.swift */; };
+		48F59E361E20049A008B4A73 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F59E351E20049A008B4A73 /* SWRevealViewController.m */; };
+		48F59E381E200585008B4A73 /* Ride.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F59E371E200585008B4A73 /* Ride.swift */; };
+		48F59E621E2048AC008B4A73 /* NewRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F59E611E2048AC008B4A73 /* NewRideViewController.swift */; };
+		48F59E651E2288FB008B4A73 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48F59E631E2288FB008B4A73 /* Main.storyboard */; };
+		48F6BE601E30223C0089A301 /* YourRidesTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F6BE5F1E30223C0089A301 /* YourRidesTableCell.swift */; };
+		48F6BE621E30311F0089A301 /* ViewYourRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F6BE611E30311F0089A301 /* ViewYourRideViewController.swift */; };
+		48F6BE651E33C53F0089A301 /* EditRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F6BE641E33C53F0089A301 /* EditRideViewController.swift */; };
+		48F6BE671E33C5640089A301 /* EditRideMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F6BE661E33C5640089A301 /* EditRideMessageViewController.swift */; };
+		497C54591AB48081C615099E /* Pods_Urider2Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 885255AD1F45401D41406534 /* Pods_Urider2Tests.framework */; };
+		E25FC6D196772499AFA074A2 /* Pods_Urider2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7E34A6F709066F04699BB29 /* Pods_Urider2.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		48F59E121E1FF642008B4A73 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 48F59DF51E1FF642008B4A73 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 48F59DFC1E1FF642008B4A73;
+			remoteInfo = Urider2;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4839628C1E28469900AD73FA /* steeringWheelIcon.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = steeringWheelIcon.jpeg; sourceTree = "<group>"; };
+		4839628E1E2847D700AD73FA /* PassengerIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PassengerIcon.png; sourceTree = "<group>"; };
+		483962901E293A0A00AD73FA /* newRideMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = newRideMessageViewController.swift; sourceTree = "<group>"; };
+		489D54B91E25FDB00049E612 /* viewRideFromTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = viewRideFromTableViewController.swift; sourceTree = "<group>"; };
+		48B3E8B91E2E78C300774E2B /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		48BCCEE61E26D1BA0039A43A /* checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = checked.png; path = ../../../Downloads/checked.png; sourceTree = "<group>"; };
+		48BCCEED1E26F7DB0039A43A /* roundTrip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = roundTrip.png; path = ../../../Desktop/icons/roundTrip.png; sourceTree = "<group>"; };
+		48BCCEEF1E26F8140039A43A /* dogIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dogIcon.png; sourceTree = "<group>"; };
+		48BCCEF11E26F8E20039A43A /* nonsmoking.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nonsmoking.png; sourceTree = "<group>"; };
+		48F59DFD1E1FF642008B4A73 /* Urider2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Urider2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		48F59E001E1FF642008B4A73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		48F59E021E1FF642008B4A73 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		48F59E071E1FF642008B4A73 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		48F59E0A1E1FF642008B4A73 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		48F59E0C1E1FF642008B4A73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		48F59E111E1FF642008B4A73 /* Urider2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Urider2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		48F59E151E1FF643008B4A73 /* Urider2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Urider2Tests.swift; sourceTree = "<group>"; };
+		48F59E171E1FF643008B4A73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		48F59E201E1FFABE008B4A73 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		48F59E221E1FFB2E008B4A73 /* Urider2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Urider2.entitlements; sourceTree = "<group>"; };
+		48F59E231E1FFB7B008B4A73 /* Urider2-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Urider2-Bridging-Header.h"; sourceTree = "<group>"; };
+		48F59E271E20043D008B4A73 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = ../../../Downloads/SidebarMenu/SidebarMenu/MapViewController.swift; sourceTree = "<group>"; };
+		48F59E281E20043D008B4A73 /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuController.swift; path = ../../../Downloads/SidebarMenu/SidebarMenu/MenuController.swift; sourceTree = "<group>"; };
+		48F59E291E20043D008B4A73 /* NewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewsTableViewCell.swift; path = ../../../Downloads/SidebarMenu/SidebarMenu/NewsTableViewCell.swift; sourceTree = "<group>"; };
+		48F59E2A1E20043D008B4A73 /* NewsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewsTableViewController.swift; path = ../../../Downloads/SidebarMenu/SidebarMenu/NewsTableViewController.swift; sourceTree = "<group>"; };
+		48F59E2B1E20043D008B4A73 /* YourRidesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YourRidesViewController.swift; path = ../../../Downloads/SidebarMenu/SidebarMenu/YourRidesViewController.swift; sourceTree = "<group>"; };
+		48F59E2C1E20043D008B4A73 /* Urider-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Urider-Bridging-Header.h"; path = "../../../Downloads/SidebarMenu/SidebarMenu/Urider-Bridging-Header.h"; sourceTree = "<group>"; };
+		48F59E341E20049A008B4A73 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = "../../../Downloads/SWRevealViewController-master/SWRevealViewController/SWRevealViewController.h"; sourceTree = "<group>"; };
+		48F59E351E20049A008B4A73 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = "../../../Downloads/SWRevealViewController-master/SWRevealViewController/SWRevealViewController.m"; sourceTree = "<group>"; };
+		48F59E371E200585008B4A73 /* Ride.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ride.swift; sourceTree = "<group>"; };
+		48F59E611E2048AC008B4A73 /* NewRideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRideViewController.swift; sourceTree = "<group>"; };
+		48F59E641E2288FB008B4A73 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		48F6BE5F1E30223C0089A301 /* YourRidesTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YourRidesTableCell.swift; sourceTree = "<group>"; };
+		48F6BE611E30311F0089A301 /* ViewYourRideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewYourRideViewController.swift; sourceTree = "<group>"; };
+		48F6BE641E33C53F0089A301 /* EditRideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditRideViewController.swift; sourceTree = "<group>"; };
+		48F6BE661E33C5640089A301 /* EditRideMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditRideMessageViewController.swift; sourceTree = "<group>"; };
+		5A58E7087C0FF3C9EC1A8FD8 /* Pods-Urider2Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Urider2Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Urider2Tests/Pods-Urider2Tests.release.xcconfig"; sourceTree = "<group>"; };
+		5D086A359E0BC50281BEC461 /* Pods-Urider2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Urider2.release.xcconfig"; path = "Pods/Target Support Files/Pods-Urider2/Pods-Urider2.release.xcconfig"; sourceTree = "<group>"; };
+		68F8F4C3D05BA8EA58E72F66 /* Pods-Urider2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Urider2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Urider2/Pods-Urider2.debug.xcconfig"; sourceTree = "<group>"; };
+		885255AD1F45401D41406534 /* Pods_Urider2Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Urider2Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7E34A6F709066F04699BB29 /* Pods_Urider2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Urider2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EBDA2272BC12846415942616 /* Pods-Urider2Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Urider2Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Urider2Tests/Pods-Urider2Tests.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		48F59DFA1E1FF642008B4A73 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E25FC6D196772499AFA074A2 /* Pods_Urider2.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		48F59E0E1E1FF642008B4A73 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				497C54591AB48081C615099E /* Pods_Urider2Tests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		48B3E8BB1E2E866C00774E2B /* NewsTableViews */ = {
+			isa = PBXGroup;
+			children = (
+				489D54B91E25FDB00049E612 /* viewRideFromTableViewController.swift */,
+				48F59E611E2048AC008B4A73 /* NewRideViewController.swift */,
+				483962901E293A0A00AD73FA /* newRideMessageViewController.swift */,
+				48F59E291E20043D008B4A73 /* NewsTableViewCell.swift */,
+				48F59E2A1E20043D008B4A73 /* NewsTableViewController.swift */,
+			);
+			name = NewsTableViews;
+			sourceTree = "<group>";
+		};
+		48BCCEE81E26D2AC0039A43A /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				4839628E1E2847D700AD73FA /* PassengerIcon.png */,
+				4839628C1E28469900AD73FA /* steeringWheelIcon.jpeg */,
+				48BCCEF11E26F8E20039A43A /* nonsmoking.png */,
+				48BCCEEF1E26F8140039A43A /* dogIcon.png */,
+				48BCCEED1E26F7DB0039A43A /* roundTrip.png */,
+				48BCCEE61E26D1BA0039A43A /* checked.png */,
+			);
+			name = Icons;
+			sourceTree = "<group>";
+		};
+		48F59DF41E1FF642008B4A73 = {
+			isa = PBXGroup;
+			children = (
+				48F59DFF1E1FF642008B4A73 /* Urider2 */,
+				48F59E141E1FF642008B4A73 /* Urider2Tests */,
+				48F59DFE1E1FF642008B4A73 /* Products */,
+				6ECA6D782199271687E66EE9 /* Pods */,
+				49804D777D5003C715470353 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		48F59DFE1E1FF642008B4A73 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				48F59DFD1E1FF642008B4A73 /* Urider2.app */,
+				48F59E111E1FF642008B4A73 /* Urider2Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		48F59DFF1E1FF642008B4A73 /* Urider2 */ = {
+			isa = PBXGroup;
+			children = (
+				48F59E631E2288FB008B4A73 /* Main.storyboard */,
+				48F59E001E1FF642008B4A73 /* AppDelegate.swift */,
+				48F6BE5E1E3021DE0089A301 /* YourRideTableView */,
+				48B3E8BB1E2E866C00774E2B /* NewsTableViews */,
+				48F6BE631E33BF6A0089A301 /* Login */,
+				48F59E271E20043D008B4A73 /* MapViewController.swift */,
+				48F59E281E20043D008B4A73 /* MenuController.swift */,
+				48B3E8B91E2E78C300774E2B /* SettingsViewController.swift */,
+				48F59E371E200585008B4A73 /* Ride.swift */,
+				48F59E2C1E20043D008B4A73 /* Urider-Bridging-Header.h */,
+				48BCCEE81E26D2AC0039A43A /* Icons */,
+				48F59E331E200452008B4A73 /* SWRevealViewController */,
+				48F59E071E1FF642008B4A73 /* Assets.xcassets */,
+				48F59E201E1FFABE008B4A73 /* GoogleService-Info.plist */,
+				48F59E091E1FF642008B4A73 /* LaunchScreen.storyboard */,
+				48F59E0C1E1FF642008B4A73 /* Info.plist */,
+				48F59E221E1FFB2E008B4A73 /* Urider2.entitlements */,
+				48F59E231E1FFB7B008B4A73 /* Urider2-Bridging-Header.h */,
+			);
+			path = Urider2;
+			sourceTree = "<group>";
+		};
+		48F59E141E1FF642008B4A73 /* Urider2Tests */ = {
+			isa = PBXGroup;
+			children = (
+				48F59E151E1FF643008B4A73 /* Urider2Tests.swift */,
+				48F59E171E1FF643008B4A73 /* Info.plist */,
+			);
+			path = Urider2Tests;
+			sourceTree = "<group>";
+		};
+		48F59E331E200452008B4A73 /* SWRevealViewController */ = {
+			isa = PBXGroup;
+			children = (
+				48F59E341E20049A008B4A73 /* SWRevealViewController.h */,
+				48F59E351E20049A008B4A73 /* SWRevealViewController.m */,
+			);
+			name = SWRevealViewController;
+			sourceTree = "<group>";
+		};
+		48F6BE5E1E3021DE0089A301 /* YourRideTableView */ = {
+			isa = PBXGroup;
+			children = (
+				48F59E2B1E20043D008B4A73 /* YourRidesViewController.swift */,
+				48F6BE5F1E30223C0089A301 /* YourRidesTableCell.swift */,
+				48F6BE611E30311F0089A301 /* ViewYourRideViewController.swift */,
+				48F6BE641E33C53F0089A301 /* EditRideViewController.swift */,
+				48F6BE661E33C5640089A301 /* EditRideMessageViewController.swift */,
+			);
+			name = YourRideTableView;
+			sourceTree = "<group>";
+		};
+		48F6BE631E33BF6A0089A301 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				48F59E021E1FF642008B4A73 /* LoginViewController.swift */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		49804D777D5003C715470353 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A7E34A6F709066F04699BB29 /* Pods_Urider2.framework */,
+				885255AD1F45401D41406534 /* Pods_Urider2Tests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6ECA6D782199271687E66EE9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				68F8F4C3D05BA8EA58E72F66 /* Pods-Urider2.debug.xcconfig */,
+				5D086A359E0BC50281BEC461 /* Pods-Urider2.release.xcconfig */,
+				EBDA2272BC12846415942616 /* Pods-Urider2Tests.debug.xcconfig */,
+				5A58E7087C0FF3C9EC1A8FD8 /* Pods-Urider2Tests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		48F59DFC1E1FF642008B4A73 /* Urider2 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 48F59E1A1E1FF643008B4A73 /* Build configuration list for PBXNativeTarget "Urider2" */;
+			buildPhases = (
+				CF01CAF1B294B012C2AC9FAA /* [CP] Check Pods Manifest.lock */,
+				48F59DF91E1FF642008B4A73 /* Sources */,
+				48F59DFA1E1FF642008B4A73 /* Frameworks */,
+				48F59DFB1E1FF642008B4A73 /* Resources */,
+				D74640556008E3E9252E1B29 /* [CP] Embed Pods Frameworks */,
+				35C8759496B2B4EE1F21C9E6 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Urider2;
+			productName = Urider2;
+			productReference = 48F59DFD1E1FF642008B4A73 /* Urider2.app */;
+			productType = "com.apple.product-type.application";
+		};
+		48F59E101E1FF642008B4A73 /* Urider2Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 48F59E1D1E1FF643008B4A73 /* Build configuration list for PBXNativeTarget "Urider2Tests" */;
+			buildPhases = (
+				4B2BAC54F3541C64BDFEF689 /* [CP] Check Pods Manifest.lock */,
+				48F59E0D1E1FF642008B4A73 /* Sources */,
+				48F59E0E1E1FF642008B4A73 /* Frameworks */,
+				48F59E0F1E1FF642008B4A73 /* Resources */,
+				AACF17011DAAFBC041284824 /* [CP] Embed Pods Frameworks */,
+				8A898C4E0A02587AE4361469 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				48F59E131E1FF642008B4A73 /* PBXTargetDependency */,
+			);
+			name = Urider2Tests;
+			productName = Urider2Tests;
+			productReference = 48F59E111E1FF642008B4A73 /* Urider2Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		48F59DF51E1FF642008B4A73 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "Duncan Lee";
+				TargetAttributes = {
+					48F59DFC1E1FF642008B4A73 = {
+						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = 24BNYQD7LC;
+						LastSwiftMigration = 0820;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
+					};
+					48F59E101E1FF642008B4A73 = {
+						CreatedOnToolsVersion = 8.2;
+						LastSwiftMigration = 0820;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 48F59DFC1E1FF642008B4A73;
+					};
+				};
+			};
+			buildConfigurationList = 48F59DF81E1FF642008B4A73 /* Build configuration list for PBXProject "Urider2" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 48F59DF41E1FF642008B4A73;
+			productRefGroup = 48F59DFE1E1FF642008B4A73 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				48F59DFC1E1FF642008B4A73 /* Urider2 */,
+				48F59E101E1FF642008B4A73 /* Urider2Tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		48F59DFB1E1FF642008B4A73 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				48BCCEE71E26D1BA0039A43A /* checked.png in Resources */,
+				48F59E0B1E1FF642008B4A73 /* LaunchScreen.storyboard in Resources */,
+				4839628D1E28469900AD73FA /* steeringWheelIcon.jpeg in Resources */,
+				48F59E211E1FFABE008B4A73 /* GoogleService-Info.plist in Resources */,
+				48BCCEF01E26F8140039A43A /* dogIcon.png in Resources */,
+				48BCCEF21E26F8E20039A43A /* nonsmoking.png in Resources */,
+				48F59E081E1FF642008B4A73 /* Assets.xcassets in Resources */,
+				4839628F1E2847D700AD73FA /* PassengerIcon.png in Resources */,
+				48F59E651E2288FB008B4A73 /* Main.storyboard in Resources */,
+				48BCCEEE1E26F7DB0039A43A /* roundTrip.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		48F59E0F1E1FF642008B4A73 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		35C8759496B2B4EE1F21C9E6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Urider2/Pods-Urider2-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4B2BAC54F3541C64BDFEF689 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8A898C4E0A02587AE4361469 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Urider2Tests/Pods-Urider2Tests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AACF17011DAAFBC041284824 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Urider2Tests/Pods-Urider2Tests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CF01CAF1B294B012C2AC9FAA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D74640556008E3E9252E1B29 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Urider2/Pods-Urider2-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		48F59DF91E1FF642008B4A73 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				48F6BE651E33C53F0089A301 /* EditRideViewController.swift in Sources */,
+				48F6BE621E30311F0089A301 /* ViewYourRideViewController.swift in Sources */,
+				48F59E2F1E20043D008B4A73 /* MenuController.swift in Sources */,
+				48F59E301E20043D008B4A73 /* NewsTableViewCell.swift in Sources */,
+				48F6BE671E33C5640089A301 /* EditRideMessageViewController.swift in Sources */,
+				48F59E381E200585008B4A73 /* Ride.swift in Sources */,
+				48F59E031E1FF642008B4A73 /* LoginViewController.swift in Sources */,
+				48B3E8BA1E2E78C300774E2B /* SettingsViewController.swift in Sources */,
+				48F59E011E1FF642008B4A73 /* AppDelegate.swift in Sources */,
+				489D54BA1E25FDB00049E612 /* viewRideFromTableViewController.swift in Sources */,
+				48F59E361E20049A008B4A73 /* SWRevealViewController.m in Sources */,
+				48F59E321E20043D008B4A73 /* YourRidesViewController.swift in Sources */,
+				48F59E311E20043D008B4A73 /* NewsTableViewController.swift in Sources */,
+				48F59E2E1E20043D008B4A73 /* MapViewController.swift in Sources */,
+				48F6BE601E30223C0089A301 /* YourRidesTableCell.swift in Sources */,
+				48F59E621E2048AC008B4A73 /* NewRideViewController.swift in Sources */,
+				483962911E293A0A00AD73FA /* newRideMessageViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		48F59E0D1E1FF642008B4A73 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				48F59E161E1FF643008B4A73 /* Urider2Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		48F59E131E1FF642008B4A73 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 48F59DFC1E1FF642008B4A73 /* Urider2 */;
+			targetProxy = 48F59E121E1FF642008B4A73 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		48F59E091E1FF642008B4A73 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				48F59E0A1E1FF642008B4A73 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		48F59E631E2288FB008B4A73 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				48F59E641E2288FB008B4A73 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		48F59E181E1FF643008B4A73 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		48F59E191E1FF643008B4A73 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		48F59E1B1E1FF643008B4A73 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 68F8F4C3D05BA8EA58E72F66 /* Pods-Urider2.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Urider2/Urider2.entitlements;
+				DEVELOPMENT_TEAM = 24BNYQD7LC;
+				INFOPLIST_FILE = Urider2/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.duncanLee.Urider2.Urider2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Urider2/Urider2-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		48F59E1C1E1FF643008B4A73 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5D086A359E0BC50281BEC461 /* Pods-Urider2.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Urider2/Urider2.entitlements;
+				DEVELOPMENT_TEAM = 24BNYQD7LC;
+				INFOPLIST_FILE = Urider2/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.duncanLee.Urider2.Urider2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Urider2/Urider2-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		48F59E1E1E1FF643008B4A73 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EBDA2272BC12846415942616 /* Pods-Urider2Tests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = Urider2Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.duncanLee.Urider2.Urider2Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Urider2.app/Urider2";
+			};
+			name = Debug;
+		};
+		48F59E1F1E1FF643008B4A73 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5A58E7087C0FF3C9EC1A8FD8 /* Pods-Urider2Tests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = Urider2Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.duncanLee.Urider2.Urider2Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Urider2.app/Urider2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		48F59DF81E1FF642008B4A73 /* Build configuration list for PBXProject "Urider2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				48F59E181E1FF643008B4A73 /* Debug */,
+				48F59E191E1FF643008B4A73 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		48F59E1A1E1FF643008B4A73 /* Build configuration list for PBXNativeTarget "Urider2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				48F59E1B1E1FF643008B4A73 /* Debug */,
+				48F59E1C1E1FF643008B4A73 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		48F59E1D1E1FF643008B4A73 /* Build configuration list for PBXNativeTarget "Urider2Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				48F59E1E1E1FF643008B4A73 /* Debug */,
+				48F59E1F1E1FF643008B4A73 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 48F59DF51E1FF642008B4A73 /* Project object */;
+}

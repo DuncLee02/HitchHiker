@@ -1,0 +1,6 @@
+framework module Pods_Urider2 {
+  umbrella header "Pods-Urider2-umbrella.h"
+
+  export *
+  module * { export * }
+}
