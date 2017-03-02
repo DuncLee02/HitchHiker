@@ -99,17 +99,17 @@ class NewRideViewController: UIViewController, UITextFieldDelegate, UIPickerView
         
         
         
-//        //initialize GMSAutocompleteObject
-//        GMSResultsViewController = GMSAutocompleteViewController()
-//        GMSResultsViewController?.delegate = self
-//        
+        //initialize autocomplete filter:
+        let filter = GMSAutocompleteFilter()
+        filter.type = .city
         
         
         //initialize GMSSearchBar
         resultsViewControllerOrigin = GMSAutocompleteResultsViewController()
         resultsViewControllerOrigin.delegate = self
+        resultsViewControllerOrigin.autocompleteFilter = filter    //remove this to allow specific address
         searchControllerOrigin = UISearchController(searchResultsController: resultsViewControllerOrigin)
-        searchControllerOrigin.searchBar.placeholder = "enter origin"
+        searchControllerOrigin.searchBar.placeholder = "enter origin city"
         //searchControllerOrigin.searchBar.prompt = "Origin"
         searchControllerOrigin.searchResultsUpdater = resultsViewControllerOrigin
         
@@ -121,8 +121,9 @@ class NewRideViewController: UIViewController, UITextFieldDelegate, UIPickerView
         
         resultsViewControllerDestination = GMSAutocompleteResultsViewController()
         resultsViewControllerDestination.delegate = self
+        resultsViewControllerDestination.autocompleteFilter = filter //remove this to allow specific address
         searchControllerDestination = UISearchController(searchResultsController: resultsViewControllerDestination)
-        searchControllerDestination.searchBar.placeholder = "enter destination"
+        searchControllerDestination.searchBar.placeholder = "enter destination city"
         //searchControllerDestination.searchBar.prompt = "Destination"
         searchControllerDestination.searchResultsUpdater = resultsViewControllerDestination
         
@@ -137,7 +138,7 @@ class NewRideViewController: UIViewController, UITextFieldDelegate, UIPickerView
         
         passengerPickerDataSource = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: Selector(("dismissDateFieldPicker")))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector((dismissDateFieldPicker)))
         self.view.addGestureRecognizer(tapGesture)
     }
     
@@ -184,10 +185,8 @@ class NewRideViewController: UIViewController, UITextFieldDelegate, UIPickerView
         newRide.isPassenger = newRideIsRequest
         newRide.time = TimeLabel.text
         newRide.oneWay = oneWayTrip
-        newRide.petsProhibited = petsProhibited
-        newRide.nonSmoking = nonSmoking
         
-        let aRideDict = [ "date": newRide.date!, "destination": newRide.destination!, "isPassenger": newRide.isPassenger!, "seats": newRide.seats!, "origin": newRide.origin!, "time": newRide.time!, "oneWay": oneWayTrip, "petsProhibited" : petsProhibited, "nonSmoking": nonSmoking] as [String : Any]
+        let aRideDict = [ "date": newRide.date!, "destination": newRide.destination!, "isPassenger": newRide.isPassenger!, "seats": newRide.seats!, "origin": newRide.origin!, "time": newRide.time!, "oneWay": oneWayTrip] as [String : Any]
         print(aRideDict)
         
         self.performSegue(withIdentifier: "lastViewToAddRide", sender: self)
@@ -323,6 +322,7 @@ class NewRideViewController: UIViewController, UITextFieldDelegate, UIPickerView
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "lastViewToAddRide") {
+            
             let messageForRideVC: newRideMessageViewController = segue.destination as! newRideMessageViewController
             
             messageForRideVC.rideToBeAdded = newRide
@@ -374,14 +374,17 @@ extension NewRideViewController: GMSAutocompleteResultsViewControllerDelegate {
     
     // Handle the user's selection.
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController, didAutocompleteWith place: GMSPlace) {
+        
         print("Place name: \(place.name)")
         print("Place address: \(place.formattedAddress)")
         print("Place attributions: \(place.attributions)")
         if (resultsController == resultsViewControllerOrigin) {
+            newRide.origCoordinates = place.coordinate
             searchControllerOrigin.searchBar.text = place.formattedAddress!
             print("Origin is " + place.formattedAddress!)
         }
         if (resultsController == resultsViewControllerDestination) {
+            newRide.destCoordinates = place.coordinate
             searchControllerDestination.searchBar.text = place.formattedAddress!
             print("Destination is " + place.formattedAddress!)
         }

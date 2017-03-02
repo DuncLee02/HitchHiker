@@ -49,8 +49,9 @@ class newRideMessageViewController: UIViewController, UITextViewDelegate {
         let author = FIRAuth.auth()?.currentUser?.email!
         
         
-        let aRideDict = [ "date": rideToBeAdded.date!, "destination": rideToBeAdded.destination!, "isPassenger": rideToBeAdded.isPassenger!, "seats": rideToBeAdded.seats!, "origin": rideToBeAdded.origin!, "time": rideToBeAdded.time!, "oneWay": rideToBeAdded.oneWay!, "petsProhibited" : rideToBeAdded.petsProhibited!, "nonSmoking": rideToBeAdded.nonSmoking!, "message": rideToBeAdded.message!, "seatsTaken": 0, "author": author!] as [String : Any]
+        let aRideDict = [ "date": rideToBeAdded.date!, "destination": rideToBeAdded.destination!, "isPassenger": rideToBeAdded.isPassenger!, "seats": rideToBeAdded.seats!, "origin": rideToBeAdded.origin!, "time": rideToBeAdded.time!, "oneWay": rideToBeAdded.oneWay!, "message": rideToBeAdded.message!, "seatsTaken": 0, "author": author!, "riders": "", "origLat": rideToBeAdded.origCoordinates!.latitude as Double, "origLong": rideToBeAdded.origCoordinates!.longitude as Double,  "destLat": rideToBeAdded.destCoordinates!.latitude as Double, "destLong": rideToBeAdded.destCoordinates!.longitude as Double] as [String : Any]
         print(aRideDict)
+        
         
         writeToRides(RideDict: aRideDict)
         
@@ -71,8 +72,55 @@ class newRideMessageViewController: UIViewController, UITextViewDelegate {
     func writeToRides(RideDict: [String: Any]) {
         print("sending data")
         let ref = FIRDatabase.database().reference()
-        ref.child("ridesDuncan").childByAutoId().setValue(RideDict)
+        //ref.child("ridesDuncan").childByAutoId().setValue(RideDict)
+        
+        ref.child("ridesDuncan").child(rideToBeAdded.destination!).childByAutoId().setValue(RideDict)
+        ref.child("ridesDuncan").child(rideToBeAdded.origin!).childByAutoId().setValue(RideDict)
+        
+        //checking/adding origin location
+        ref.child("locationsDuncan").child(rideToBeAdded.origin!).observeSingleEvent(of: .value, with: { (snapshot) in
+            if (snapshot.exists()) {
+                print("snapshot found...")
+                print(snapshot)
+                var number = 0
+                if let dictionary = snapshot.value as? [String: AnyObject]  {
+                    number = dictionary["numOrig"] as! Int
+                    ref.child("locationsDuncan").child(self.rideToBeAdded.origin!).child("numOrig").setValue(number + 1)
+                }
+                else{
+                    print("cannot access data...")
+                }
+            }
+            else{
+                print("doesn't exist...")
+                ref.child("locationsDuncan").child(self.rideToBeAdded.origin!).setValue(["lat": self.rideToBeAdded.origCoordinates?.latitude as AnyObject, "long": self.rideToBeAdded.origCoordinates?.longitude as AnyObject, "numDest": 0 as AnyObject,"numOrig": 1 as AnyObject] as [String: AnyObject])
+            }
+            
+        })
+        
+        //checking/adding destination location
+        ref.child("locationsDuncan").child(rideToBeAdded.destination!).observeSingleEvent(of: .value, with: { (snapshot) in
+            if (snapshot.exists()) {
+                print("snapshot found...")
+                print(snapshot)
+                var number = 0
+                if let dictionary = snapshot.value as? [String: AnyObject]  {
+                    number = dictionary["numDest"] as! Int
+                    ref.child("locationsDuncan").child(self.rideToBeAdded.destination!).child("numDest").setValue(number + 1)
+                }
+                else{
+                    print("cannot access data...")
+                }
+            }
+            else{
+                print("doesn't exist...")
+                ref.child("locationsDuncan").child(self.rideToBeAdded.destination!).setValue(["lat": self.rideToBeAdded.destCoordinates?.latitude as AnyObject, "long": self.rideToBeAdded.destCoordinates?.longitude as AnyObject, "numDest": 1 as AnyObject, "numOrig": 0 as AnyObject] as [String: AnyObject])
+            }
+            
+        })
     }
+
+    
     
     func dismissKeyboard() {
         self.view.endEditing(true)

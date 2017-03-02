@@ -11,7 +11,7 @@ target 'Urider2' do
   pod 'FirebaseDatabase'
   pod 'GoogleSignIn'
   pod 'GooglePlaces'
-  pod 'Google/Analytics'
+  #pod 'Google/Analytics'
 
   target 'Urider2Tests' do
     inherit! :search_paths

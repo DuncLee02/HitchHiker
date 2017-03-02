@@ -7,15 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4821D1F71E4C07EA001267AE /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4821D1F61E4C07EA001267AE /* UserInfoViewController.swift */; };
+		482415FC1E674B1B00DFF8BD /* newCity.png in Resources */ = {isa = PBXBuildFile; fileRef = 482415FB1E674B1B00DFF8BD /* newCity.png */; };
 		4839628D1E28469900AD73FA /* steeringWheelIcon.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 4839628C1E28469900AD73FA /* steeringWheelIcon.jpeg */; };
 		4839628F1E2847D700AD73FA /* PassengerIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4839628E1E2847D700AD73FA /* PassengerIcon.png */; };
-		483962911E293A0A00AD73FA /* newRideMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483962901E293A0A00AD73FA /* newRideMessageViewController.swift */; };
+		486FAD281E54D31F00268884 /* car.png in Resources */ = {isa = PBXBuildFile; fileRef = 486FAD271E54D31F00268884 /* car.png */; };
+		486FAD2A1E568CE400268884 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 486FAD291E568CE400268884 /* arrow.png */; };
+		486FAD301E57595200268884 /* MagnGlass.png in Resources */ = {isa = PBXBuildFile; fileRef = 486FAD2F1E57595200268884 /* MagnGlass.png */; };
+		486FAD341E57CBF500268884 /* Gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 486FAD331E57CBF500268884 /* Gear.png */; };
+		486FAD361E57CC4A00268884 /* GearBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 486FAD351E57CC4A00268884 /* GearBox.png */; };
+		486FAD371E59475900268884 /* newRideMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483962901E293A0A00AD73FA /* newRideMessageViewController.swift */; };
+		486FAD391E594F1F00268884 /* CityInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486FAD381E594F1F00268884 /* CityInfo.swift */; };
+		486FAD3B1E5E556E00268884 /* MapMarkerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486FAD3A1E5E556E00268884 /* MapMarkerTableViewController.swift */; };
+		486FAD3E1E5E5DC400268884 /* markerListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486FAD3D1E5E5DC400268884 /* markerListTableViewCell.swift */; };
+		486FAD401E6225D000268884 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486FAD3F1E6225D000268884 /* City.swift */; };
+		486FAD421E62A4FE00268884 /* BackArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 486FAD411E62A4FE00268884 /* BackArrow.png */; };
+		486FAD441E62A50200268884 /* List.png in Resources */ = {isa = PBXBuildFile; fileRef = 486FAD431E62A50200268884 /* List.png */; };
+		486FAD481E65684C00268884 /* CircleIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 486FAD471E65684C00268884 /* CircleIcon.png */; };
+		488D49D11E4AB9E50086A760 /* riderInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488D49D01E4AB9E50086A760 /* riderInfoViewController.swift */; };
+		488D49D31E4ABBAD0086A760 /* riderInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488D49D21E4ABBAD0086A760 /* riderInfoTableViewCell.swift */; };
 		489D54BA1E25FDB00049E612 /* viewRideFromTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489D54B91E25FDB00049E612 /* viewRideFromTableViewController.swift */; };
 		48B3E8BA1E2E78C300774E2B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B3E8B91E2E78C300774E2B /* SettingsViewController.swift */; };
 		48BCCEE71E26D1BA0039A43A /* checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 48BCCEE61E26D1BA0039A43A /* checked.png */; };
 		48BCCEEE1E26F7DB0039A43A /* roundTrip.png in Resources */ = {isa = PBXBuildFile; fileRef = 48BCCEED1E26F7DB0039A43A /* roundTrip.png */; };
 		48BCCEF01E26F8140039A43A /* dogIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 48BCCEEF1E26F8140039A43A /* dogIcon.png */; };
 		48BCCEF21E26F8E20039A43A /* nonsmoking.png in Resources */ = {isa = PBXBuildFile; fileRef = 48BCCEF11E26F8E20039A43A /* nonsmoking.png */; };
+		48D888081E53800E00DE794E /* Circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 48D888071E53800E00DE794E /* Circle.png */; };
+		48E88D821E660C37000750C2 /* HitchHike.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48F59E631E2288FB008B4A73 /* HitchHike.storyboard */; };
+		48E88D851E662CFE000750C2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E88D841E662CFE000750C2 /* HomeViewController.swift */; };
 		48F59E011E1FF642008B4A73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F59E001E1FF642008B4A73 /* AppDelegate.swift */; };
 		48F59E031E1FF642008B4A73 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F59E021E1FF642008B4A73 /* LoginViewController.swift */; };
 		48F59E081E1FF642008B4A73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48F59E071E1FF642008B4A73 /* Assets.xcassets */; };
@@ -30,7 +49,6 @@
 		48F59E361E20049A008B4A73 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F59E351E20049A008B4A73 /* SWRevealViewController.m */; };
 		48F59E381E200585008B4A73 /* Ride.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F59E371E200585008B4A73 /* Ride.swift */; };
 		48F59E621E2048AC008B4A73 /* NewRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F59E611E2048AC008B4A73 /* NewRideViewController.swift */; };
-		48F59E651E2288FB008B4A73 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48F59E631E2288FB008B4A73 /* Main.storyboard */; };
 		48F6BE601E30223C0089A301 /* YourRidesTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F6BE5F1E30223C0089A301 /* YourRidesTableCell.swift */; };
 		48F6BE621E30311F0089A301 /* ViewYourRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F6BE611E30311F0089A301 /* ViewYourRideViewController.swift */; };
 		48F6BE651E33C53F0089A301 /* EditRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F6BE641E33C53F0089A301 /* EditRideViewController.swift */; };
@@ -50,15 +68,33 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4821D1F61E4C07EA001267AE /* UserInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
+		482415FB1E674B1B00DFF8BD /* newCity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newCity.png; sourceTree = "<group>"; };
 		4839628C1E28469900AD73FA /* steeringWheelIcon.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = steeringWheelIcon.jpeg; sourceTree = "<group>"; };
 		4839628E1E2847D700AD73FA /* PassengerIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PassengerIcon.png; sourceTree = "<group>"; };
 		483962901E293A0A00AD73FA /* newRideMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = newRideMessageViewController.swift; sourceTree = "<group>"; };
+		486FAD271E54D31F00268884 /* car.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = car.png; sourceTree = "<group>"; };
+		486FAD291E568CE400268884 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
+		486FAD2F1E57595200268884 /* MagnGlass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MagnGlass.png; sourceTree = "<group>"; };
+		486FAD331E57CBF500268884 /* Gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gear.png; sourceTree = "<group>"; };
+		486FAD351E57CC4A00268884 /* GearBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GearBox.png; sourceTree = "<group>"; };
+		486FAD381E594F1F00268884 /* CityInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CityInfo.swift; path = Urider2/CityInfo.swift; sourceTree = "<group>"; };
+		486FAD3A1E5E556E00268884 /* MapMarkerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapMarkerTableViewController.swift; sourceTree = "<group>"; };
+		486FAD3D1E5E5DC400268884 /* markerListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = markerListTableViewCell.swift; sourceTree = "<group>"; };
+		486FAD3F1E6225D000268884 /* City.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = City.swift; path = Urider2/City.swift; sourceTree = "<group>"; };
+		486FAD411E62A4FE00268884 /* BackArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackArrow.png; sourceTree = "<group>"; };
+		486FAD431E62A50200268884 /* List.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = List.png; sourceTree = "<group>"; };
+		486FAD471E65684C00268884 /* CircleIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CircleIcon.png; sourceTree = "<group>"; };
+		488D49D01E4AB9E50086A760 /* riderInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = riderInfoViewController.swift; sourceTree = "<group>"; };
+		488D49D21E4ABBAD0086A760 /* riderInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = riderInfoTableViewCell.swift; sourceTree = "<group>"; };
 		489D54B91E25FDB00049E612 /* viewRideFromTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = viewRideFromTableViewController.swift; sourceTree = "<group>"; };
 		48B3E8B91E2E78C300774E2B /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		48BCCEE61E26D1BA0039A43A /* checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = checked.png; path = ../../../Downloads/checked.png; sourceTree = "<group>"; };
 		48BCCEED1E26F7DB0039A43A /* roundTrip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = roundTrip.png; path = ../../../Desktop/icons/roundTrip.png; sourceTree = "<group>"; };
 		48BCCEEF1E26F8140039A43A /* dogIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dogIcon.png; sourceTree = "<group>"; };
 		48BCCEF11E26F8E20039A43A /* nonsmoking.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nonsmoking.png; sourceTree = "<group>"; };
+		48D888071E53800E00DE794E /* Circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Circle.png; sourceTree = "<group>"; };
+		48E88D841E662CFE000750C2 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		48F59DFD1E1FF642008B4A73 /* Urider2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Urider2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48F59E001E1FF642008B4A73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		48F59E021E1FF642008B4A73 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -79,9 +115,9 @@
 		48F59E2C1E20043D008B4A73 /* Urider-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Urider-Bridging-Header.h"; path = "../../../Downloads/SidebarMenu/SidebarMenu/Urider-Bridging-Header.h"; sourceTree = "<group>"; };
 		48F59E341E20049A008B4A73 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = "../../../Downloads/SWRevealViewController-master/SWRevealViewController/SWRevealViewController.h"; sourceTree = "<group>"; };
 		48F59E351E20049A008B4A73 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = "../../../Downloads/SWRevealViewController-master/SWRevealViewController/SWRevealViewController.m"; sourceTree = "<group>"; };
-		48F59E371E200585008B4A73 /* Ride.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ride.swift; sourceTree = "<group>"; };
+		48F59E371E200585008B4A73 /* Ride.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Ride.swift; path = Urider2/Ride.swift; sourceTree = "<group>"; };
 		48F59E611E2048AC008B4A73 /* NewRideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRideViewController.swift; sourceTree = "<group>"; };
-		48F59E641E2288FB008B4A73 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		48F59E641E2288FB008B4A73 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/HitchHike.storyboard; sourceTree = "<group>"; };
 		48F6BE5F1E30223C0089A301 /* YourRidesTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YourRidesTableCell.swift; sourceTree = "<group>"; };
 		48F6BE611E30311F0089A301 /* ViewYourRideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewYourRideViewController.swift; sourceTree = "<group>"; };
 		48F6BE641E33C53F0089A301 /* EditRideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditRideViewController.swift; sourceTree = "<group>"; };
@@ -114,6 +150,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		486FAD451E64ADE300268884 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				48F59E371E200585008B4A73 /* Ride.swift */,
+				486FAD381E594F1F00268884 /* CityInfo.swift */,
+				486FAD3F1E6225D000268884 /* City.swift */,
+			);
+			name = Classes;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		486FAD461E64AE0300268884 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				48B3E8B91E2E78C300774E2B /* SettingsViewController.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
 		48B3E8BB1E2E866C00774E2B /* NewsTableViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +184,16 @@
 		48BCCEE81E26D2AC0039A43A /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				486FAD471E65684C00268884 /* CircleIcon.png */,
+				482415FB1E674B1B00DFF8BD /* newCity.png */,
+				486FAD431E62A50200268884 /* List.png */,
+				486FAD411E62A4FE00268884 /* BackArrow.png */,
+				486FAD351E57CC4A00268884 /* GearBox.png */,
+				486FAD331E57CBF500268884 /* Gear.png */,
+				486FAD2F1E57595200268884 /* MagnGlass.png */,
+				486FAD291E568CE400268884 /* arrow.png */,
+				486FAD271E54D31F00268884 /* car.png */,
+				48D888071E53800E00DE794E /* Circle.png */,
 				4839628E1E2847D700AD73FA /* PassengerIcon.png */,
 				4839628C1E28469900AD73FA /* steeringWheelIcon.jpeg */,
 				48BCCEF11E26F8E20039A43A /* nonsmoking.png */,
@@ -137,6 +202,24 @@
 				48BCCEE61E26D1BA0039A43A /* checked.png */,
 			);
 			name = Icons;
+			sourceTree = "<group>";
+		};
+		48D888091E53B96300DE794E /* MapViews */ = {
+			isa = PBXGroup;
+			children = (
+				48F59E271E20043D008B4A73 /* MapViewController.swift */,
+				486FAD3A1E5E556E00268884 /* MapMarkerTableViewController.swift */,
+				486FAD3D1E5E5DC400268884 /* markerListTableViewCell.swift */,
+			);
+			name = MapViews;
+			sourceTree = "<group>";
+		};
+		48E88D831E662CA5000750C2 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				48E88D841E662CFE000750C2 /* HomeViewController.swift */,
+			);
+			name = Test;
 			sourceTree = "<group>";
 		};
 		48F59DF41E1FF642008B4A73 = {
@@ -162,15 +245,16 @@
 		48F59DFF1E1FF642008B4A73 /* Urider2 */ = {
 			isa = PBXGroup;
 			children = (
-				48F59E631E2288FB008B4A73 /* Main.storyboard */,
+				48F59E631E2288FB008B4A73 /* HitchHike.storyboard */,
 				48F59E001E1FF642008B4A73 /* AppDelegate.swift */,
 				48F6BE5E1E3021DE0089A301 /* YourRideTableView */,
 				48B3E8BB1E2E866C00774E2B /* NewsTableViews */,
 				48F6BE631E33BF6A0089A301 /* Login */,
-				48F59E271E20043D008B4A73 /* MapViewController.swift */,
+				48D888091E53B96300DE794E /* MapViews */,
+				486FAD461E64AE0300268884 /* Settings */,
+				486FAD451E64ADE300268884 /* Classes */,
+				48E88D831E662CA5000750C2 /* Test */,
 				48F59E281E20043D008B4A73 /* MenuController.swift */,
-				48B3E8B91E2E78C300774E2B /* SettingsViewController.swift */,
-				48F59E371E200585008B4A73 /* Ride.swift */,
 				48F59E2C1E20043D008B4A73 /* Urider-Bridging-Header.h */,
 				48BCCEE81E26D2AC0039A43A /* Icons */,
 				48F59E331E200452008B4A73 /* SWRevealViewController */,
@@ -210,6 +294,8 @@
 				48F6BE611E30311F0089A301 /* ViewYourRideViewController.swift */,
 				48F6BE641E33C53F0089A301 /* EditRideViewController.swift */,
 				48F6BE661E33C5640089A301 /* EditRideMessageViewController.swift */,
+				488D49D01E4AB9E50086A760 /* riderInfoViewController.swift */,
+				488D49D21E4ABBAD0086A760 /* riderInfoTableViewCell.swift */,
 			);
 			name = YourRideTableView;
 			sourceTree = "<group>";
@@ -218,6 +304,7 @@
 			isa = PBXGroup;
 			children = (
 				48F59E021E1FF642008B4A73 /* LoginViewController.swift */,
+				4821D1F61E4C07EA001267AE /* UserInfoViewController.swift */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -339,16 +426,26 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48E88D821E660C37000750C2 /* HitchHike.storyboard in Resources */,
+				486FAD281E54D31F00268884 /* car.png in Resources */,
+				486FAD481E65684C00268884 /* CircleIcon.png in Resources */,
+				486FAD301E57595200268884 /* MagnGlass.png in Resources */,
 				48BCCEE71E26D1BA0039A43A /* checked.png in Resources */,
 				48F59E0B1E1FF642008B4A73 /* LaunchScreen.storyboard in Resources */,
 				4839628D1E28469900AD73FA /* steeringWheelIcon.jpeg in Resources */,
 				48F59E211E1FFABE008B4A73 /* GoogleService-Info.plist in Resources */,
+				486FAD361E57CC4A00268884 /* GearBox.png in Resources */,
+				482415FC1E674B1B00DFF8BD /* newCity.png in Resources */,
+				486FAD2A1E568CE400268884 /* arrow.png in Resources */,
 				48BCCEF01E26F8140039A43A /* dogIcon.png in Resources */,
+				486FAD441E62A50200268884 /* List.png in Resources */,
 				48BCCEF21E26F8E20039A43A /* nonsmoking.png in Resources */,
 				48F59E081E1FF642008B4A73 /* Assets.xcassets in Resources */,
 				4839628F1E2847D700AD73FA /* PassengerIcon.png in Resources */,
-				48F59E651E2288FB008B4A73 /* Main.storyboard in Resources */,
+				486FAD421E62A4FE00268884 /* BackArrow.png in Resources */,
+				486FAD341E57CBF500268884 /* Gear.png in Resources */,
 				48BCCEEE1E26F7DB0039A43A /* roundTrip.png in Resources */,
+				48D888081E53800E00DE794E /* Circle.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -459,23 +556,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48E88D851E662CFE000750C2 /* HomeViewController.swift in Sources */,
 				48F6BE651E33C53F0089A301 /* EditRideViewController.swift in Sources */,
 				48F6BE621E30311F0089A301 /* ViewYourRideViewController.swift in Sources */,
 				48F59E2F1E20043D008B4A73 /* MenuController.swift in Sources */,
 				48F59E301E20043D008B4A73 /* NewsTableViewCell.swift in Sources */,
+				4821D1F71E4C07EA001267AE /* UserInfoViewController.swift in Sources */,
+				488D49D31E4ABBAD0086A760 /* riderInfoTableViewCell.swift in Sources */,
 				48F6BE671E33C5640089A301 /* EditRideMessageViewController.swift in Sources */,
+				486FAD371E59475900268884 /* newRideMessageViewController.swift in Sources */,
 				48F59E381E200585008B4A73 /* Ride.swift in Sources */,
 				48F59E031E1FF642008B4A73 /* LoginViewController.swift in Sources */,
+				488D49D11E4AB9E50086A760 /* riderInfoViewController.swift in Sources */,
 				48B3E8BA1E2E78C300774E2B /* SettingsViewController.swift in Sources */,
 				48F59E011E1FF642008B4A73 /* AppDelegate.swift in Sources */,
 				489D54BA1E25FDB00049E612 /* viewRideFromTableViewController.swift in Sources */,
+				486FAD401E6225D000268884 /* City.swift in Sources */,
 				48F59E361E20049A008B4A73 /* SWRevealViewController.m in Sources */,
 				48F59E321E20043D008B4A73 /* YourRidesViewController.swift in Sources */,
 				48F59E311E20043D008B4A73 /* NewsTableViewController.swift in Sources */,
+				486FAD3E1E5E5DC400268884 /* markerListTableViewCell.swift in Sources */,
 				48F59E2E1E20043D008B4A73 /* MapViewController.swift in Sources */,
 				48F6BE601E30223C0089A301 /* YourRidesTableCell.swift in Sources */,
 				48F59E621E2048AC008B4A73 /* NewRideViewController.swift in Sources */,
-				483962911E293A0A00AD73FA /* newRideMessageViewController.swift in Sources */,
+				486FAD3B1E5E556E00268884 /* MapMarkerTableViewController.swift in Sources */,
+				486FAD391E594F1F00268884 /* CityInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,12 +611,12 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
-		48F59E631E2288FB008B4A73 /* Main.storyboard */ = {
+		48F59E631E2288FB008B4A73 /* HitchHike.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				48F59E641E2288FB008B4A73 /* Base */,
 			);
-			name = Main.storyboard;
+			name = HitchHike.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

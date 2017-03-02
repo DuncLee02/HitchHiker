@@ -82,10 +82,6 @@ class EditRideViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         TimeLabel.text = rideBeingEdited.time
         PassengersLabel.text = "\(rideBeingEdited.seats!)"
         
-        if(rideBeingEdited.nonSmoking == false) {
-            nonSmokingSwitch.isOn = false
-            nonSmoking = false
-        }
         
         if(rideBeingEdited.isPassenger == true) {
             requestBooleanButton.setImage(#imageLiteral(resourceName: "checked.png"), for: .normal)
@@ -186,8 +182,6 @@ class EditRideViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         rideBeingCreated.isPassenger = newRideIsRequest
         rideBeingCreated.time = TimeLabel.text
         rideBeingCreated.oneWay = oneWayTrip
-        rideBeingCreated.petsProhibited = petsProhibited
-        rideBeingCreated.nonSmoking = nonSmoking
         
 //        let aRideDict = [ "date": rideBeingEdited.date!, "destination": rideBeingEdited.destination!, "isPassenger": rideBeingEdited.isPassenger!, "seats": rideBeingEdited.seats!, "origin": rideBeingEdited.origin!, "time": rideBeingEdited.time!, "oneWay": oneWayTrip, "petsProhibited" : petsProhibited, "nonSmoking": nonSmoking] as [String : Any]
 //        print(aRideDict)

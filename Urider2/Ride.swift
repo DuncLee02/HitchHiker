@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import GoogleMaps
 
 class Ride: NSObject {
     
@@ -19,11 +20,13 @@ class Ride: NSObject {
     var message: String?
     var author : String?
     var key: String?
+    var riders: [String]?
+    
+    var destCoordinates: CLLocationCoordinate2D?
+    var origCoordinates: CLLocationCoordinate2D?
     
     var isPassenger: Bool?
     var oneWay: Bool?
-    var nonSmoking: Bool?
-    var petsProhibited: Bool?
     
     var seats: Int?
     var seatsTaken: Int?

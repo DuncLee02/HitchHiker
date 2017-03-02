@@ -11,6 +11,8 @@ target 'Urider2' do
   pod 'FirebaseDatabase'
   pod 'GoogleSignIn'
   pod 'GooglePlaces'
+  pod 'GooglePlacePicker'
+  pod 'GoogleMaps'
   #pod 'Google/Analytics'
 
   target 'Urider2Tests' do

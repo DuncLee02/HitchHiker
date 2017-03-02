@@ -8,12 +8,14 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
 import GoogleSignIn
 import GooglePlaces
+import GoogleMaps
 //import Google
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     var window: UIWindow?
 
@@ -23,8 +25,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRApp.configure()
         
         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
+        GIDSignIn.sharedInstance().delegate = self
         
-        GMSPlacesClient.provideAPIKey("AIzaSyBi2aDSrVnac2xgpPOd4PpH42fJWC6X8mA")
+        GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
+        
+        GMSPlacesClient.provideAPIKey("AIzaSyBzG2AojBz9T4RJh9CnJDVPPM8Ut_Yt9-A")
+        GMSServices.provideAPIKey("AIzaSyBzG2AojBz9T4RJh9CnJDVPPM8Ut_Yt9")
         
         //var configureError: NSError?
         //GGLContext.sharedInstance().configureWithError(&configureError)
@@ -39,6 +45,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                                                 annotation: options[UIApplicationOpenURLOptionsKey.annotation])
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+    }
+    
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+        GMSPlacesClient.provideAPIKey("AIzaSyBi2aDSrVnac2xgpPOd4PpH42fJWC6X8mA")
+        return true;
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
@@ -74,34 +85,55 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //MARK: GIDSignIn Delegate Methods
     
-//    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-//        print("sign in in app delegate")
-//        if let error = error {
-//            print(error.localizedDescription)
-//            return
-//        }
-//        
-//        guard let authentication = user.authentication else { return }
-//        let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken,
-//                                                          accessToken: authentication.accessToken)
-//        
-//        FIRAuth.auth()?.signIn(with: credential) { (user, error) in
-//            // ...
-//            if let error = error {
-//                print(error.localizedDescription)
-//                return
-//            }
-//            
-//            //self.performSegue(withIdentifier: "SegueToTable", sender: self)
-//            try! FIRAuth.auth()!.signOut()
-//        }
-//        
-//    }
-//    
-//    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
-//        if (error != nil) {
-//            print(error.localizedDescription)
-//        }
+    func sign(inWillDispatch signIn: GIDSignIn!, error: Error!) {
+        print("Nothing!")
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        print("logging in...")
+        if let error = error {
+            print(error.localizedDescription)
+            return
+        }
+        
+        guard let authentication = user.authentication else { return}
+        let credential = FIRGoogleAuthProvider.credential(withIDToken: (authentication.idToken)!, accessToken: (authentication.accessToken)!)
+        
+        FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
+            if error != nil {
+                print(error?.localizedDescription as Any)
+                return
+            }
+            print("User logged in with google..........")
+            print(FIRAuth.auth()?.currentUser?.displayName as Any)
+            self.checkUserAgainstDatabase()
+        })
+        //        self.performSegue(withIdentifier: "SegueToTable", sender: self)
+    }
+    
+    func checkUserAgainstDatabase() {
+        let userEmail = FIRAuth.auth()?.currentUser?.email!
+        let ref = FIRDatabase.database().reference()
+        
+        if (userEmail?.hasSuffix(".edu") == false) {
+            print("not a school email")
+            return;
+        }
+        
+        let userRef = ref.child("usersDuncan").queryEqual(toValue: userEmail).observe(.value, with: { (snapshot) in
+            if (snapshot.exists() == true) {
+                print("user has been found")
+                //self.performSegue(withIdentifier: "SegueToTable", sender: self)
+            }
+            else {
+                print("new user")
+                //self.performSegue(withIdentifier: "SegueToTable", sender: self)
+                //self.performSegue(withIdentifier: "segueToUserInfoView", sender: self)
+            }
+        })
+        
+    }
+
 }   
 
 

@@ -23,16 +23,14 @@ class ViewYourRideViewController: UIViewController {
     
     
     
+    @IBOutlet weak var roundTripImage: UIImageView!
     @IBOutlet weak var driverOrPassengerImage: UIImageView!
-    @IBOutlet weak var image2: UIImageView!
-    @IBOutlet weak var image1: UIImageView!
-    @IBOutlet weak var image3: UIImageView!
+    
     
     @IBOutlet weak var EditRideButton: UIButton!
     @IBOutlet weak var DeleteRideButton: UIButton!
     
-    var rideIndex: Int!
-    var rideList: [Ride]!
+    var rideBeingViewed: Ride!
     var ref: FIRDatabaseReference!
 
     override func viewDidLoad() {
@@ -48,17 +46,14 @@ class ViewYourRideViewController: UIViewController {
         
         print("loading values from tableviewcontroller...")
         
-        print("non smoking: ", rideList[rideIndex].nonSmoking!)
-        print("one way: ", rideList[rideIndex].oneWay!)
-        print("pets prohibited: ",rideList[rideIndex].petsProhibited!)
         
-        self.messageAboutRideTextView.text = rideList[rideIndex].message
-        self.dateLabel.text = rideList[rideIndex].date
-        self.destinationLabel.text = rideList[rideIndex].destination
-        self.originLabel.text = rideList[rideIndex].origin
-        self.timeLabel.text = rideList[rideIndex].time
+        self.messageAboutRideTextView.text = rideBeingViewed.message
+        self.dateLabel.text = rideBeingViewed.date
+        self.destinationLabel.text = rideBeingViewed.destination
+        self.originLabel.text = rideBeingViewed.origin
+        self.timeLabel.text = rideBeingViewed.time
         
-        if rideList[rideIndex].isPassenger == true {
+        if rideBeingViewed.isPassenger == true {
             self.driverOrPassengerImage.image = #imageLiteral(resourceName: "PassengerIcon.png")
             self.rideOrRequestLabel.text = "Request"
         }
@@ -67,17 +62,10 @@ class ViewYourRideViewController: UIViewController {
             self.rideOrRequestLabel.text = "Ride"
         }
         
-        if rideList[rideIndex].nonSmoking == true {
-            self.image1.image = #imageLiteral(resourceName: "nonsmoking.png")
+        if rideBeingViewed.oneWay == false {
+            self.roundTripImage.image = #imageLiteral(resourceName: "roundTrip.png")
         }
         
-        if rideList[rideIndex].oneWay == false {
-            self.image2.image = #imageLiteral(resourceName: "roundTrip.png")
-        }
-        
-        if rideList[rideIndex].petsProhibited == false {
-            self.image3.image = #imageLiteral(resourceName: "dogIcon.png")
-        }
 
         // Do any additional setup after loading the view.
     }
@@ -90,8 +78,8 @@ class ViewYourRideViewController: UIViewController {
         let yesAction = UIAlertAction(title: "yes", style: UIAlertActionStyle.default, handler: {
             (_)in
             alert.dismiss(animated: true, completion: nil)
-            self.ref.child("ridesDuncan").child(self.rideList[self.rideIndex].key!).removeValue()
-            YourRidesViewController.globalYourRideList.yourRideList.remove(at: YourRidesViewController.globalYourRideList.yourRideList.index(of: self.rideList[self.rideIndex])!)
+            self.ref.child("ridesDuncan").child(self.rideBeingViewed.key!).removeValue()
+            YourRidesViewController.globalYourRideList.yourRideList.remove(at: YourRidesViewController.globalYourRideList.yourRideList.index(of: self.rideBeingViewed)!)
             self.performSegue(withIdentifier: "unwindSegueToYourRides", sender: self)
             print("back to yourRidesTable")
         })
@@ -122,7 +110,12 @@ class ViewYourRideViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "segueToEditRide") {
             let editRideVC: EditRideViewController = segue.destination as! EditRideViewController
-            editRideVC.rideBeingEdited = rideList[rideIndex]
+            editRideVC.rideBeingEdited = rideBeingViewed
+        }
+        
+        if (segue.identifier == "segueToViewRiders") {
+            let rideInfoVC: riderInfoViewController = segue.destination as! riderInfoViewController
+            rideInfoVC.riderInfo = rideBeingViewed.riders
         }
     }
     

@@ -48,7 +48,7 @@ class EditRideMessageViewController: UIViewController, UITextViewDelegate {
         
         let author = FIRAuth.auth()?.currentUser?.email!
         
-        let aRideDict = [ "date": rideBeingCreated.date!, "destination": rideBeingCreated.destination!, "isPassenger": rideBeingCreated.isPassenger!, "seats": rideBeingCreated.seats!, "origin": rideBeingCreated.origin!, "time": rideBeingCreated.time!, "oneWay": rideBeingCreated.oneWay!, "petsProhibited" : rideBeingCreated.petsProhibited!, "nonSmoking": rideBeingCreated.nonSmoking!, "message": rideBeingCreated.message!, "seatsTaken": 0, "author": author!] as [String : Any]
+        let aRideDict = [ "date": rideBeingCreated.date!, "destination": rideBeingCreated.destination!, "isPassenger": rideBeingCreated.isPassenger!, "seats": rideBeingCreated.seats!, "origin": rideBeingCreated.origin!, "time": rideBeingCreated.time!, "oneWay": rideBeingCreated.oneWay!, "message": rideBeingCreated.message!, "seatsTaken": 0, "author": author!] as [String : Any]
         
         editRide(RideDict: aRideDict)
         

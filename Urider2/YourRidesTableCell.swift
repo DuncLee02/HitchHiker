@@ -17,9 +17,8 @@ class YourRidesTableCell: UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var viewButton: UIButton!
     
-    @IBOutlet weak var iconImageView1: UIImageView!
-    @IBOutlet weak var iconImageView2: UIImageView!
-    @IBOutlet weak var iconImageView3: UIImageView!
+    @IBOutlet weak var roundTripIcon: UIImageView!
+    @IBOutlet weak var rideOrRequestIcon: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
