@@ -21,6 +21,7 @@ class MapMarkerTableViewController: UITableViewController, UISearchBarDelegate {
     
     struct markerCity {
         static var currentcity: City!
+        static var subset: String!
     }
     
     var searchBar: UISearchBar!
@@ -34,24 +35,25 @@ class MapMarkerTableViewController: UITableViewController, UISearchBarDelegate {
         searchBar.placeholder = "search for rides"
         searchBar.delegate = self
         
-        self.tableView.tableHeaderView = searchBar
-        self.tableView.tableHeaderView?.isOpaque = true
-        self.tableView.tableHeaderView?.backgroundColor = #colorLiteral(red: 0.3485831618, green: 0.614120543, blue: 1, alpha: 0.6)
-        self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-
+        if (markerCity.currentcity.rideList.count == 0) {
+            self.navigationItem.title = "No Rides Found"
+        }
+        else{
+            self.navigationItem.title = markerCity.currentcity.cityInfo.name
+            self.tableView.tableHeaderView = searchBar
+            self.tableView.tableHeaderView?.isOpaque = true
+            self.tableView.tableHeaderView?.tintColor = #colorLiteral(red: 0.3485831618, green: 0.614120543, blue: 1, alpha: 0.6)
+        }
         
         cellList = markerCity.currentcity.rideList.filter({ (someRide) -> Bool in
-            return true
+            if (someRide.destination == markerCity.subset) {
+                return true
+            }
+            return false
         })
-        
-        
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
+    
+    
     
     //MARK: fetch Marker's Rides
     
@@ -62,19 +64,25 @@ class MapMarkerTableViewController: UITableViewController, UISearchBarDelegate {
         // Dispose of any resources that can be recreated.
     }
 
+    
+    
     // MARK: - Table view data source
+    
+    
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
+    
+    
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cellList.count
     }
     
     
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "markerCell", for: indexPath) as! markerListTableViewCell
         
 //        //set cell contents
@@ -88,7 +96,7 @@ class MapMarkerTableViewController: UITableViewController, UISearchBarDelegate {
         
         cell.destinationLabel.text = cellList[indexPath.row].destination
         cell.startPointLabel.text = cellList[indexPath.row].origin
-        cell.numberSeatsLabel.text = "\(cellList[indexPath.row].seats!)"
+        cell.numberSeatsLabel.text = "\(cellList[indexPath.row].seats! - (cellList[indexPath.row].riders?.count)!)"
         cell.dateLabel.text = cellList[indexPath.row].date
         cell.timeLabel.text = cellList[indexPath.row].time
         
@@ -111,6 +119,14 @@ class MapMarkerTableViewController: UITableViewController, UISearchBarDelegate {
         }
         return cell
     }
+    
+    
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        NSLog("clicked cell, pulling up ride")
+        self.performSegue(withIdentifier: "segueToViewRide", sender: self)
+    }
+    
     
     
     //MARK: searchbar delegates
@@ -164,15 +180,22 @@ class MapMarkerTableViewController: UITableViewController, UISearchBarDelegate {
     }
 
     
-
-    /*
+    
     // MARK: - Navigation
 
+    
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if (segue.identifier == "segueToViewRide") {
+            let indexPath = self.tableView.indexPathForSelectedRow?.row
+            let viewRideVC: viewRideFromTableViewController = segue.destination as! viewRideFromTableViewController
+            
+            viewRideVC.rideBeingViewed = cellList[indexPath!]
+            viewRideVC.cityInTable = markerCity.currentcity
+        }
     }
-    */
+ 
+    
 
 }

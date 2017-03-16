@@ -11,10 +11,15 @@
 		482415FC1E674B1B00DFF8BD /* newCity.png in Resources */ = {isa = PBXBuildFile; fileRef = 482415FB1E674B1B00DFF8BD /* newCity.png */; };
 		4839628D1E28469900AD73FA /* steeringWheelIcon.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 4839628C1E28469900AD73FA /* steeringWheelIcon.jpeg */; };
 		4839628F1E2847D700AD73FA /* PassengerIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4839628E1E2847D700AD73FA /* PassengerIcon.png */; };
+		486BBDDC1E782BDD009B0C74 /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486BBDDB1E782BDD009B0C74 /* Destination.swift */; };
+		486BBDDE1E7833FD009B0C74 /* customDestinationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 486BBDDD1E7833FD009B0C74 /* customDestinationCell.xib */; };
+		486BBDE01E7834E6009B0C74 /* DestinationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486BBDDF1E7834E6009B0C74 /* DestinationTableViewCell.swift */; };
+		486BBDEB1E79E98A009B0C74 /* greenArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 486BBDE91E79E98A009B0C74 /* greenArrow.png */; };
+		486BBDEC1E79E98A009B0C74 /* redArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 486BBDEA1E79E98A009B0C74 /* redArrow.png */; };
+		486BBDEE1E7B15AC009B0C74 /* Arrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486BBDED1E7B15AC009B0C74 /* Arrow.swift */; };
 		486FAD281E54D31F00268884 /* car.png in Resources */ = {isa = PBXBuildFile; fileRef = 486FAD271E54D31F00268884 /* car.png */; };
 		486FAD2A1E568CE400268884 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 486FAD291E568CE400268884 /* arrow.png */; };
 		486FAD301E57595200268884 /* MagnGlass.png in Resources */ = {isa = PBXBuildFile; fileRef = 486FAD2F1E57595200268884 /* MagnGlass.png */; };
-		486FAD341E57CBF500268884 /* Gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 486FAD331E57CBF500268884 /* Gear.png */; };
 		486FAD361E57CC4A00268884 /* GearBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 486FAD351E57CC4A00268884 /* GearBox.png */; };
 		486FAD371E59475900268884 /* newRideMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483962901E293A0A00AD73FA /* newRideMessageViewController.swift */; };
 		486FAD391E594F1F00268884 /* CityInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486FAD381E594F1F00268884 /* CityInfo.swift */; };
@@ -35,6 +40,10 @@
 		48D888081E53800E00DE794E /* Circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 48D888071E53800E00DE794E /* Circle.png */; };
 		48E88D821E660C37000750C2 /* HitchHike.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48F59E631E2288FB008B4A73 /* HitchHike.storyboard */; };
 		48E88D851E662CFE000750C2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E88D841E662CFE000750C2 /* HomeViewController.swift */; };
+		48F1A0CD1E6870C700C77D3E /* sidecar.png in Resources */ = {isa = PBXBuildFile; fileRef = 48F1A0CA1E6870C700C77D3E /* sidecar.png */; };
+		48F1A0CE1E6870C700C77D3E /* sidecargreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 48F1A0CB1E6870C700C77D3E /* sidecargreen.png */; };
+		48F1A0CF1E6870C700C77D3E /* thumb.png in Resources */ = {isa = PBXBuildFile; fileRef = 48F1A0CC1E6870C700C77D3E /* thumb.png */; };
+		48F1A0D11E6870CD00C77D3E /* greenthumb.png in Resources */ = {isa = PBXBuildFile; fileRef = 48F1A0D01E6870CD00C77D3E /* greenthumb.png */; };
 		48F59E011E1FF642008B4A73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F59E001E1FF642008B4A73 /* AppDelegate.swift */; };
 		48F59E031E1FF642008B4A73 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F59E021E1FF642008B4A73 /* LoginViewController.swift */; };
 		48F59E081E1FF642008B4A73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48F59E071E1FF642008B4A73 /* Assets.xcassets */; };
@@ -73,6 +82,12 @@
 		4839628C1E28469900AD73FA /* steeringWheelIcon.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = steeringWheelIcon.jpeg; sourceTree = "<group>"; };
 		4839628E1E2847D700AD73FA /* PassengerIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PassengerIcon.png; sourceTree = "<group>"; };
 		483962901E293A0A00AD73FA /* newRideMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = newRideMessageViewController.swift; sourceTree = "<group>"; };
+		486BBDDB1E782BDD009B0C74 /* Destination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
+		486BBDDD1E7833FD009B0C74 /* customDestinationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = customDestinationCell.xib; sourceTree = "<group>"; };
+		486BBDDF1E7834E6009B0C74 /* DestinationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationTableViewCell.swift; sourceTree = "<group>"; };
+		486BBDE91E79E98A009B0C74 /* greenArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = greenArrow.png; path = ../../../Desktop/icons/greenArrow.png; sourceTree = "<group>"; };
+		486BBDEA1E79E98A009B0C74 /* redArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = redArrow.png; path = ../../../Desktop/icons/redArrow.png; sourceTree = "<group>"; };
+		486BBDED1E7B15AC009B0C74 /* Arrow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Arrow.swift; sourceTree = "<group>"; };
 		486FAD271E54D31F00268884 /* car.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = car.png; sourceTree = "<group>"; };
 		486FAD291E568CE400268884 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
 		486FAD2F1E57595200268884 /* MagnGlass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MagnGlass.png; sourceTree = "<group>"; };
@@ -95,6 +110,10 @@
 		48BCCEF11E26F8E20039A43A /* nonsmoking.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nonsmoking.png; sourceTree = "<group>"; };
 		48D888071E53800E00DE794E /* Circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Circle.png; sourceTree = "<group>"; };
 		48E88D841E662CFE000750C2 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		48F1A0CA1E6870C700C77D3E /* sidecar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sidecar.png; path = ../../../Desktop/icons/sidecar.png; sourceTree = "<group>"; };
+		48F1A0CB1E6870C700C77D3E /* sidecargreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sidecargreen.png; path = ../../../Desktop/icons/sidecargreen.png; sourceTree = "<group>"; };
+		48F1A0CC1E6870C700C77D3E /* thumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = thumb.png; path = ../../../Desktop/icons/thumb.png; sourceTree = "<group>"; };
+		48F1A0D01E6870CD00C77D3E /* greenthumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = greenthumb.png; path = ../../../Desktop/icons/greenthumb.png; sourceTree = "<group>"; };
 		48F59DFD1E1FF642008B4A73 /* Urider2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Urider2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48F59E001E1FF642008B4A73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		48F59E021E1FF642008B4A73 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -156,6 +175,8 @@
 				48F59E371E200585008B4A73 /* Ride.swift */,
 				486FAD381E594F1F00268884 /* CityInfo.swift */,
 				486FAD3F1E6225D000268884 /* City.swift */,
+				486BBDDB1E782BDD009B0C74 /* Destination.swift */,
+				486BBDED1E7B15AC009B0C74 /* Arrow.swift */,
 			);
 			name = Classes;
 			path = ..;
@@ -172,9 +193,6 @@
 		48B3E8BB1E2E866C00774E2B /* NewsTableViews */ = {
 			isa = PBXGroup;
 			children = (
-				489D54B91E25FDB00049E612 /* viewRideFromTableViewController.swift */,
-				48F59E611E2048AC008B4A73 /* NewRideViewController.swift */,
-				483962901E293A0A00AD73FA /* newRideMessageViewController.swift */,
 				48F59E291E20043D008B4A73 /* NewsTableViewCell.swift */,
 				48F59E2A1E20043D008B4A73 /* NewsTableViewController.swift */,
 			);
@@ -184,6 +202,12 @@
 		48BCCEE81E26D2AC0039A43A /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				486BBDE91E79E98A009B0C74 /* greenArrow.png */,
+				486BBDEA1E79E98A009B0C74 /* redArrow.png */,
+				48F1A0CA1E6870C700C77D3E /* sidecar.png */,
+				48F1A0D01E6870CD00C77D3E /* greenthumb.png */,
+				48F1A0CB1E6870C700C77D3E /* sidecargreen.png */,
+				48F1A0CC1E6870C700C77D3E /* thumb.png */,
 				486FAD471E65684C00268884 /* CircleIcon.png */,
 				482415FB1E674B1B00DFF8BD /* newCity.png */,
 				486FAD431E62A50200268884 /* List.png */,
@@ -210,6 +234,11 @@
 				48F59E271E20043D008B4A73 /* MapViewController.swift */,
 				486FAD3A1E5E556E00268884 /* MapMarkerTableViewController.swift */,
 				486FAD3D1E5E5DC400268884 /* markerListTableViewCell.swift */,
+				489D54B91E25FDB00049E612 /* viewRideFromTableViewController.swift */,
+				48F59E611E2048AC008B4A73 /* NewRideViewController.swift */,
+				483962901E293A0A00AD73FA /* newRideMessageViewController.swift */,
+				486BBDDD1E7833FD009B0C74 /* customDestinationCell.xib */,
+				486BBDDF1E7834E6009B0C74 /* DestinationTableViewCell.swift */,
 			);
 			name = MapViews;
 			sourceTree = "<group>";
@@ -250,9 +279,9 @@
 				48F6BE5E1E3021DE0089A301 /* YourRideTableView */,
 				48B3E8BB1E2E866C00774E2B /* NewsTableViews */,
 				48F6BE631E33BF6A0089A301 /* Login */,
-				48D888091E53B96300DE794E /* MapViews */,
 				486FAD461E64AE0300268884 /* Settings */,
 				486FAD451E64ADE300268884 /* Classes */,
+				48D888091E53B96300DE794E /* MapViews */,
 				48E88D831E662CA5000750C2 /* Test */,
 				48F59E281E20043D008B4A73 /* MenuController.swift */,
 				48F59E2C1E20043D008B4A73 /* Urider-Bridging-Header.h */,
@@ -428,22 +457,28 @@
 			files = (
 				48E88D821E660C37000750C2 /* HitchHike.storyboard in Resources */,
 				486FAD281E54D31F00268884 /* car.png in Resources */,
-				486FAD481E65684C00268884 /* CircleIcon.png in Resources */,
+				48F1A0CF1E6870C700C77D3E /* thumb.png in Resources */,
+				486BBDEB1E79E98A009B0C74 /* greenArrow.png in Resources */,
 				486FAD301E57595200268884 /* MagnGlass.png in Resources */,
 				48BCCEE71E26D1BA0039A43A /* checked.png in Resources */,
+				486FAD481E65684C00268884 /* CircleIcon.png in Resources */,
 				48F59E0B1E1FF642008B4A73 /* LaunchScreen.storyboard in Resources */,
 				4839628D1E28469900AD73FA /* steeringWheelIcon.jpeg in Resources */,
 				48F59E211E1FFABE008B4A73 /* GoogleService-Info.plist in Resources */,
 				486FAD361E57CC4A00268884 /* GearBox.png in Resources */,
 				482415FC1E674B1B00DFF8BD /* newCity.png in Resources */,
+				48F1A0D11E6870CD00C77D3E /* greenthumb.png in Resources */,
+				486BBDEC1E79E98A009B0C74 /* redArrow.png in Resources */,
 				486FAD2A1E568CE400268884 /* arrow.png in Resources */,
 				48BCCEF01E26F8140039A43A /* dogIcon.png in Resources */,
 				486FAD441E62A50200268884 /* List.png in Resources */,
 				48BCCEF21E26F8E20039A43A /* nonsmoking.png in Resources */,
+				486BBDDE1E7833FD009B0C74 /* customDestinationCell.xib in Resources */,
+				48F1A0CE1E6870C700C77D3E /* sidecargreen.png in Resources */,
 				48F59E081E1FF642008B4A73 /* Assets.xcassets in Resources */,
 				4839628F1E2847D700AD73FA /* PassengerIcon.png in Resources */,
 				486FAD421E62A4FE00268884 /* BackArrow.png in Resources */,
-				486FAD341E57CBF500268884 /* Gear.png in Resources */,
+				48F1A0CD1E6870C700C77D3E /* sidecar.png in Resources */,
 				48BCCEEE1E26F7DB0039A43A /* roundTrip.png in Resources */,
 				48D888081E53800E00DE794E /* Circle.png in Resources */,
 			);
@@ -565,6 +600,7 @@
 				488D49D31E4ABBAD0086A760 /* riderInfoTableViewCell.swift in Sources */,
 				48F6BE671E33C5640089A301 /* EditRideMessageViewController.swift in Sources */,
 				486FAD371E59475900268884 /* newRideMessageViewController.swift in Sources */,
+				486BBDE01E7834E6009B0C74 /* DestinationTableViewCell.swift in Sources */,
 				48F59E381E200585008B4A73 /* Ride.swift in Sources */,
 				48F59E031E1FF642008B4A73 /* LoginViewController.swift in Sources */,
 				488D49D11E4AB9E50086A760 /* riderInfoViewController.swift in Sources */,
@@ -572,6 +608,7 @@
 				48F59E011E1FF642008B4A73 /* AppDelegate.swift in Sources */,
 				489D54BA1E25FDB00049E612 /* viewRideFromTableViewController.swift in Sources */,
 				486FAD401E6225D000268884 /* City.swift in Sources */,
+				486BBDDC1E782BDD009B0C74 /* Destination.swift in Sources */,
 				48F59E361E20049A008B4A73 /* SWRevealViewController.m in Sources */,
 				48F59E321E20043D008B4A73 /* YourRidesViewController.swift in Sources */,
 				48F59E311E20043D008B4A73 /* NewsTableViewController.swift in Sources */,
@@ -579,6 +616,7 @@
 				48F59E2E1E20043D008B4A73 /* MapViewController.swift in Sources */,
 				48F6BE601E30223C0089A301 /* YourRidesTableCell.swift in Sources */,
 				48F59E621E2048AC008B4A73 /* NewRideViewController.swift in Sources */,
+				486BBDEE1E7B15AC009B0C74 /* Arrow.swift in Sources */,
 				486FAD3B1E5E556E00268884 /* MapMarkerTableViewController.swift in Sources */,
 				486FAD391E594F1F00268884 /* CityInfo.swift in Sources */,
 			);

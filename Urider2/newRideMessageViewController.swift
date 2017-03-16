@@ -29,7 +29,7 @@ class newRideMessageViewController: UIViewController, UITextViewDelegate {
         messageForRide.layer.borderWidth = 4
         messageForRide.layer.cornerRadius = 8
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: Selector(("dismissKeyboard")))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         self.view.addGestureRecognizer(tapGesture)
         
         // Do any additional setup after loading the view.
@@ -48,10 +48,9 @@ class newRideMessageViewController: UIViewController, UITextViewDelegate {
         
         let author = FIRAuth.auth()?.currentUser?.email!
         
-        
-        let aRideDict = [ "date": rideToBeAdded.date!, "destination": rideToBeAdded.destination!, "isPassenger": rideToBeAdded.isPassenger!, "seats": rideToBeAdded.seats!, "origin": rideToBeAdded.origin!, "time": rideToBeAdded.time!, "oneWay": rideToBeAdded.oneWay!, "message": rideToBeAdded.message!, "seatsTaken": 0, "author": author!, "riders": "", "origLat": rideToBeAdded.origCoordinates!.latitude as Double, "origLong": rideToBeAdded.origCoordinates!.longitude as Double,  "destLat": rideToBeAdded.destCoordinates!.latitude as Double, "destLong": rideToBeAdded.destCoordinates!.longitude as Double] as [String : Any]
+        //removed "riders" : ""
+        let aRideDict = [ "date": rideToBeAdded.date!, "destination": rideToBeAdded.destination!, "isPassenger": rideToBeAdded.isPassenger!, "seats": rideToBeAdded.seats!, "origin": rideToBeAdded.origin!, "time": rideToBeAdded.time!, "oneWay": rideToBeAdded.oneWay!, "message": rideToBeAdded.message!, "seatsTaken": 0, "author": author!, "origLat": rideToBeAdded.origCoordinates!.latitude as Double, "origLong": rideToBeAdded.origCoordinates!.longitude as Double,  "destLat": rideToBeAdded.destCoordinates!.latitude as Double, "destLong": rideToBeAdded.destCoordinates!.longitude as Double] as [String : Any]
         print(aRideDict)
-        
         
         writeToRides(RideDict: aRideDict)
         
@@ -63,10 +62,6 @@ class newRideMessageViewController: UIViewController, UITextViewDelegate {
         print("data sent")
         alert.addAction(OKAction)
         self.present(alert, animated: true, completion: nil)
-        
-//        performSegue(withIdentifier: "unwindToNewsTable", sender: self)
-        
-        
     }
     
     func writeToRides(RideDict: [String: Any]) {
@@ -74,8 +69,14 @@ class newRideMessageViewController: UIViewController, UITextViewDelegate {
         let ref = FIRDatabase.database().reference()
         //ref.child("ridesDuncan").childByAutoId().setValue(RideDict)
         
-        ref.child("ridesDuncan").child(rideToBeAdded.destination!).childByAutoId().setValue(RideDict)
-        ref.child("ridesDuncan").child(rideToBeAdded.origin!).childByAutoId().setValue(RideDict)
+        let email = FIRAuth.auth()?.currentUser?.email
+        let uuid = UUID().uuidString
+        
+        ref.child("ridesDuncan").child(rideToBeAdded.destination!).child(uuid).setValue(RideDict)
+        
+        ref.child("ridesDuncan").child(rideToBeAdded.origin!).child(uuid).setValue(RideDict)
+        
+        ref.child("userRides").child(LoginViewController.currentUser.uid).child(uuid).setValue(RideDict)
         
         //checking/adding origin location
         ref.child("locationsDuncan").child(rideToBeAdded.origin!).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -85,7 +86,7 @@ class newRideMessageViewController: UIViewController, UITextViewDelegate {
                 var number = 0
                 if let dictionary = snapshot.value as? [String: AnyObject]  {
                     number = dictionary["numOrig"] as! Int
-                    ref.child("locationsDuncan").child(self.rideToBeAdded.origin!).child("numOrig").setValue(number + 1)
+                ref.child("locationsDuncan").child(self.rideToBeAdded.origin!).child("numOrig").setValue(number + 1)
                 }
                 else{
                     print("cannot access data...")
@@ -95,7 +96,6 @@ class newRideMessageViewController: UIViewController, UITextViewDelegate {
                 print("doesn't exist...")
                 ref.child("locationsDuncan").child(self.rideToBeAdded.origin!).setValue(["lat": self.rideToBeAdded.origCoordinates?.latitude as AnyObject, "long": self.rideToBeAdded.origCoordinates?.longitude as AnyObject, "numDest": 0 as AnyObject,"numOrig": 1 as AnyObject] as [String: AnyObject])
             }
-            
         })
         
         //checking/adding destination location
@@ -116,7 +116,6 @@ class newRideMessageViewController: UIViewController, UITextViewDelegate {
                 print("doesn't exist...")
                 ref.child("locationsDuncan").child(self.rideToBeAdded.destination!).setValue(["lat": self.rideToBeAdded.destCoordinates?.latitude as AnyObject, "long": self.rideToBeAdded.destCoordinates?.longitude as AnyObject, "numDest": 1 as AnyObject, "numOrig": 0 as AnyObject] as [String: AnyObject])
             }
-            
         })
     }
 
@@ -126,7 +125,7 @@ class newRideMessageViewController: UIViewController, UITextViewDelegate {
         self.view.endEditing(true)
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -134,6 +133,6 @@ class newRideMessageViewController: UIViewController, UITextViewDelegate {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
+    
 
 }

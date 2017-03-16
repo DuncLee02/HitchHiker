@@ -78,8 +78,27 @@ class ViewYourRideViewController: UIViewController {
         let yesAction = UIAlertAction(title: "yes", style: UIAlertActionStyle.default, handler: {
             (_)in
             alert.dismiss(animated: true, completion: nil)
-            self.ref.child("ridesDuncan").child(self.rideBeingViewed.key!).removeValue()
+//            self.ref.child("ridesDuncan").child(self.rideBeingViewed.key!).removeValue()
+//            YourRidesViewController.globalYourRideList.yourRideList.remove(at: YourRidesViewController.globalYourRideList.yourRideList.index(of: self.rideBeingViewed)!)
+            self.ref.child("ridesDuncan").child(self.rideBeingViewed.destination!).child(self.rideBeingViewed.key!).removeValue()
+            self.ref.child("ridesDuncan").child(self.rideBeingViewed.origin!).child(self.rideBeingViewed.key!).removeValue()
+            self.ref.child("userRides").child(LoginViewController.currentUser.uid).child(self.rideBeingViewed.key!).removeValue()
+            
+            //decrement city ridecounts
+            for cities in MapViewController.mapViewRideList.cityList {
+                if cities.cityInfo.name == self.rideBeingViewed.origin {
+                    print(self.rideBeingViewed.origin!)
+                    print(cities.cityInfo.numOrig)
+                    self.ref.child("locationsDuncan").child(self.rideBeingViewed.origin!).child("numOrig").setValue(cities.cityInfo.numOrig - 1)
+                }
+                if cities.cityInfo.name == self.rideBeingViewed.destination {
+                    self.ref.child("locationsDuncan").child(self.rideBeingViewed.destination!).child("numDest").setValue(cities.cityInfo.numDest - 1)
+                }
+            }
+            
+            //removes value from yourRidesList
             YourRidesViewController.globalYourRideList.yourRideList.remove(at: YourRidesViewController.globalYourRideList.yourRideList.index(of: self.rideBeingViewed)!)
+            
             self.performSegue(withIdentifier: "unwindSegueToYourRides", sender: self)
             print("back to yourRidesTable")
         })

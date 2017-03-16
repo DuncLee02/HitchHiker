@@ -45,12 +45,18 @@ class NewRideViewController: UIViewController, UITextFieldDelegate, UIPickerView
     var resultsViewControllerDestination: GMSAutocompleteResultsViewController!
     var searchControllerDestination: UISearchController!
 
+    //data from sender...
+    var presetDestination = ""
+    var presetDestCoordinates: CLLocationCoordinate2D!
+    var presetOrigin = ""
+    var presetOrigCoordinates: CLLocationCoordinate2D!
+    var presetRideType = "none"
     
     
     
     //labels
-    @IBOutlet weak var DestinationLabel: UITextField!
-    @IBOutlet weak var OriginLabel: UITextField!
+//    @IBOutlet weak var DestinationLabel: UITextField!
+//    @IBOutlet weak var OriginLabel: UITextField!
     @IBOutlet weak var PassengersLabel: UITextField!
     @IBOutlet weak var TimeLabel: UITextField!
     @IBOutlet weak var DateLabel: UITextField!
@@ -60,8 +66,6 @@ class NewRideViewController: UIViewController, UITextFieldDelegate, UIPickerView
     //switches and buttons
     @IBOutlet weak var rideBooleanButton: UIButton!
     @IBOutlet weak var requestBooleanButton: UIButton!
-    @IBOutlet weak var nonSmokingSwitch: UISwitch!
-    @IBOutlet weak var petsProhibitedSwitch: UISwitch!
     @IBOutlet weak var oneWaySwitch: UISwitch!
     
     
@@ -76,8 +80,6 @@ class NewRideViewController: UIViewController, UITextFieldDelegate, UIPickerView
         DateLabel.delegate = self
         TimeLabel.delegate = self
         PassengersLabel.delegate = self
-        OriginLabel.delegate = self
-        DestinationLabel.delegate = self
         PassengersLabel.text = "0"
         
         //initialize textfield values
@@ -90,12 +92,6 @@ class NewRideViewController: UIViewController, UITextFieldDelegate, UIPickerView
         //other
         backgroundOptionsLabel.layer.masksToBounds = true
         backgroundOptionsLabel.layer.cornerRadius = 8
-        rideBooleanButton.layer.cornerRadius = 5
-        rideBooleanButton.layer.borderWidth = 1
-        rideBooleanButton.layer.borderColor = UIColor.blue.cgColor
-        requestBooleanButton.layer.cornerRadius = 5
-        requestBooleanButton.layer.borderWidth = 1
-        requestBooleanButton.layer.borderColor = UIColor.blue.cgColor
         
         
         
@@ -111,9 +107,11 @@ class NewRideViewController: UIViewController, UITextFieldDelegate, UIPickerView
         searchControllerOrigin = UISearchController(searchResultsController: resultsViewControllerOrigin)
         searchControllerOrigin.searchBar.placeholder = "enter origin city"
         //searchControllerOrigin.searchBar.prompt = "Origin"
+        searchControllerOrigin.searchBar.backgroundImage = UIImage()
         searchControllerOrigin.searchResultsUpdater = resultsViewControllerOrigin
         
-        let subView = UIView(frame: CGRect(x: 0, y: 63.0, width: view.frame.width, height: 45.0))
+        let subView = UIView(frame: CGRect(x: self.view.frame.midX, y: 63.0, width: view.frame.width, height: 45.0))
+        subView.layer.position = CGPoint(x: self.view.frame.midX, y: 80)
         subView.addSubview((searchControllerOrigin.searchBar))
         view.addSubview(subView)
         searchControllerOrigin.searchBar.sizeToFit()
@@ -124,16 +122,34 @@ class NewRideViewController: UIViewController, UITextFieldDelegate, UIPickerView
         resultsViewControllerDestination.autocompleteFilter = filter //remove this to allow specific address
         searchControllerDestination = UISearchController(searchResultsController: resultsViewControllerDestination)
         searchControllerDestination.searchBar.placeholder = "enter destination city"
+        searchControllerDestination.searchBar.backgroundImage = UIImage()
         //searchControllerDestination.searchBar.prompt = "Destination"
         searchControllerDestination.searchResultsUpdater = resultsViewControllerDestination
         
-        let subView2 = UIView(frame: CGRect(x: 0, y: 105, width: view.frame.width, height: 45.0))
+        let subView2 = UIView(frame: CGRect(x: self.view.frame.midX, y: 105, width: view.frame.width, height: 45.0))
+        subView2.layer.position = CGPoint(x: self.view.frame.midX, y: 110)
         subView2.addSubview((searchControllerDestination.searchBar))
         view.addSubview(subView2)
         searchControllerDestination.searchBar.sizeToFit()
         searchControllerDestination.hidesNavigationBarDuringPresentation = false
-        
         definesPresentationContext = true
+        
+        if (presetDestination != "") {
+            self.searchControllerDestination.searchBar.text = presetDestination
+            newRide.destCoordinates = presetDestCoordinates
+        }
+        if (presetOrigin != "") {
+            self.searchControllerOrigin.searchBar.text = presetOrigin
+            newRide.origCoordinates = presetOrigCoordinates
+        }
+        if (presetRideType != "none") {
+            if (presetRideType == "ride") {
+                rideBooleanButtonPressed(self)
+            }
+            if (presetRideType == "request") {
+                requestBooleanButtonPressed(self)
+            }
+        }
         
         
         passengerPickerDataSource = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
@@ -214,35 +230,16 @@ class NewRideViewController: UIViewController, UITextFieldDelegate, UIPickerView
         rideTypeWasSet = true
         if (isRide == true) {
             newRideIsRequest = false
-            rideBooleanButton.setImage(#imageLiteral(resourceName: "checked.png"), for: .normal)
-            requestBooleanButton.setImage(nil, for: .normal)
+            rideBooleanButton.setImage(#imageLiteral(resourceName: "sidecargreen.png"), for: .normal)
+            requestBooleanButton.setImage(#imageLiteral(resourceName: "thumb.png"), for: .normal)
             
         }
         if (isRide == false) {
             newRideIsRequest = true
-            rideBooleanButton.setImage(nil, for: .normal)
-            requestBooleanButton.setImage(#imageLiteral(resourceName: "checked.png"), for: .normal)
+            rideBooleanButton.setImage(#imageLiteral(resourceName: "sidecar.png"), for: .normal)
+            requestBooleanButton.setImage(#imageLiteral(resourceName: "greenthumb.png"), for: .normal)
             
         }
-    }
-    
-    @IBAction func nonsmokingSwitchValueChanged(_ sender: Any) {
-        if (nonSmokingSwitch.isOn) {
-            nonSmoking = true
-        }
-        else {
-            nonSmoking = false
-        }
-    }
-    
-    @IBAction func petsProhibitedSwitchValueChanged(_ sender: Any) {
-        if (petsProhibitedSwitch.isOn) {
-            petsProhibited = true
-        }
-        else {
-            petsProhibited = false
-        }
-        
     }
     
     @IBAction func oneWaySwitchValueChanged(_ sender: Any) {

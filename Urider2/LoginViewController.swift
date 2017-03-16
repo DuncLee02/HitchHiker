@@ -11,6 +11,7 @@ import Firebase
 import FirebaseAuth
 import FirebaseDatabase
 import GoogleSignIn
+import GooglePlaces
 
 
 class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
@@ -20,6 +21,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         static var name = ""
         static var school = ""
         static var email = ""
+        static var defaultPlace: CLLocationCoordinate2D!
     }
 
     @IBOutlet weak var SignInButton: GIDSignInButton!
@@ -67,16 +69,15 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
                 print(error?.localizedDescription as Any)
                 return
             }
+            currentUser.uid = (user?.uid)!
             print("User logged in with google..........")
             print(FIRAuth.auth()?.currentUser?.displayName as Any)
             self.checkUserAgainstDatabase()
         })
-//        self.performSegue(withIdentifier: "SegueToTable", sender: self)
     }
 
     func checkUserAgainstDatabase() {
         let userEmail = FIRAuth.auth()?.currentUser?.email!
-        let name = FIRAuth.auth()?.currentUser?.displayName!
         let ref = FIRDatabase.database().reference()
         
         if (userEmail?.hasSuffix(".edu") == false) {
@@ -84,45 +85,41 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
             return;
         }
         
-        ref.child("usersDuncan").queryOrdered(byChild: "email").queryEqual(toValue: userEmail).observeSingleEvent(of: .value, with: { (snapshot) in
+        ref.child("usersDuncan").child(currentUser.uid).observeSingleEvent(of: .value, with: { (snapshot) in
             print(snapshot)
             if (snapshot.exists()) {
-                for childsnaps in snapshot.children.allObjects as! [FIRDataSnapshot] {
-                    print(childsnaps)
-                    if let dictionary = childsnaps.value as? [String: AnyObject] {
-//                        print(snapshot.key)
-                        currentUser.uid = snapshot.key as! String
-//                        print(dictionary["school"]!)
-                        currentUser.email = dictionary["email"] as! String
-                        currentUser.name = dictionary["name"] as! String
-                        currentUser.school = dictionary["school"] as! String
-                    }
-                    else {
-                        print("unable to access data...")
-                    }
+                if let dictionary = snapshot.value as? [String: AnyObject] {
+                    currentUser.email = dictionary["email"] as! String
+                    currentUser.name = dictionary["name"] as! String
+                    currentUser.school = dictionary["school"] as! String
+                    let latitude = dictionary["lat"] as! Double
+                    let longitude = dictionary["lon"] as! Double
+                    currentUser.defaultPlace = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                    self.performSegue(withIdentifier: "SegueToTable", sender: self)
+                    return
                 }
-                self.performSegue(withIdentifier: "SegueToTable", sender: self)
+                else {
+                    print("unable to access data...")
+                }
+                self.performSegue(withIdentifier: "segueToUserInfoView", sender: self)
+//                for childsnaps in snapshot.children.allObjects as! [FIRDataSnapshot] {
+//                    print(childsnaps)
+//                    if let dictionary = childsnaps.value as? [String: AnyObject] {
+//                        currentUser.email = dictionary["email"] as! String
+//                        currentUser.name = dictionary["name"] as! String
+//                        currentUser.school = dictionary["school"] as! String
+//                    }
+//                    else {
+//                        print("unable to access data...")
+//                    }
+//                }
+//                self.performSegue(withIdentifier: "SegueToTable", sender: self)
 
             }
             else {
                 print("new user")
-                //getting school from email
-                var indexOfAt = userEmail?.characters.index(of: "@")
-                indexOfAt = userEmail?.index(indexOfAt!, offsetBy: 1)
                 
-                var school = userEmail?.substring(from: indexOfAt!)
-                
-                //                let indexOfEdu = userEmail?.range(of: ".edu")
-                let indexOfEdu = school?.index( (school?.endIndex)! , offsetBy: -4 )
-                school = school?.substring(to: (indexOfEdu)!)
-                print(school)
-                let dictionary = ["email": userEmail!, "school": school!, "name": name!] as [String : Any]
-                print(dictionary)
-                ref.child("usersDuncan").childByAutoId().setValue(dictionary)
-                currentUser.email = userEmail!
-                currentUser.name = name!
-                currentUser.school = school!
-                self.performSegue(withIdentifier: "SegueToTable", sender: self)
+                self.performSegue(withIdentifier: "segueToUserInfoView", sender: self)
             }
             
         })

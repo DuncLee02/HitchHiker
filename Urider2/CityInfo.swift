@@ -15,5 +15,5 @@ class CityInfo: NSObject {
     var name: String!
     var numOrig: Int!
     var numDest: Int!
-    var rideList: [Ride]!
+    var loaded = false
 }
