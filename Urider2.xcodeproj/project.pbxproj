@@ -62,6 +62,7 @@
 		48F6BE621E30311F0089A301 /* ViewYourRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F6BE611E30311F0089A301 /* ViewYourRideViewController.swift */; };
 		48F6BE651E33C53F0089A301 /* EditRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F6BE641E33C53F0089A301 /* EditRideViewController.swift */; };
 		48F6BE671E33C5640089A301 /* EditRideMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F6BE661E33C5640089A301 /* EditRideMessageViewController.swift */; };
+		48F817531E7D6E17002C23E5 /* greyArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 48F817521E7D6E17002C23E5 /* greyArrow.png */; };
 		497C54591AB48081C615099E /* Pods_Urider2Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 885255AD1F45401D41406534 /* Pods_Urider2Tests.framework */; };
 		E25FC6D196772499AFA074A2 /* Pods_Urider2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7E34A6F709066F04699BB29 /* Pods_Urider2.framework */; };
 /* End PBXBuildFile section */
@@ -141,6 +142,7 @@
 		48F6BE611E30311F0089A301 /* ViewYourRideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewYourRideViewController.swift; sourceTree = "<group>"; };
 		48F6BE641E33C53F0089A301 /* EditRideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditRideViewController.swift; sourceTree = "<group>"; };
 		48F6BE661E33C5640089A301 /* EditRideMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditRideMessageViewController.swift; sourceTree = "<group>"; };
+		48F817521E7D6E17002C23E5 /* greyArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = greyArrow.png; path = ../../../Desktop/icons/greyArrow.png; sourceTree = "<group>"; };
 		5A58E7087C0FF3C9EC1A8FD8 /* Pods-Urider2Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Urider2Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Urider2Tests/Pods-Urider2Tests.release.xcconfig"; sourceTree = "<group>"; };
 		5D086A359E0BC50281BEC461 /* Pods-Urider2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Urider2.release.xcconfig"; path = "Pods/Target Support Files/Pods-Urider2/Pods-Urider2.release.xcconfig"; sourceTree = "<group>"; };
 		68F8F4C3D05BA8EA58E72F66 /* Pods-Urider2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Urider2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Urider2/Pods-Urider2.debug.xcconfig"; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 		48BCCEE81E26D2AC0039A43A /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				48F817521E7D6E17002C23E5 /* greyArrow.png */,
 				486BBDE91E79E98A009B0C74 /* greenArrow.png */,
 				486BBDEA1E79E98A009B0C74 /* redArrow.png */,
 				48F1A0CA1E6870C700C77D3E /* sidecar.png */,
@@ -461,6 +464,7 @@
 				486BBDEB1E79E98A009B0C74 /* greenArrow.png in Resources */,
 				486FAD301E57595200268884 /* MagnGlass.png in Resources */,
 				48BCCEE71E26D1BA0039A43A /* checked.png in Resources */,
+				48F817531E7D6E17002C23E5 /* greyArrow.png in Resources */,
 				486FAD481E65684C00268884 /* CircleIcon.png in Resources */,
 				48F59E0B1E1FF642008B4A73 /* LaunchScreen.storyboard in Resources */,
 				4839628D1E28469900AD73FA /* steeringWheelIcon.jpeg in Resources */,

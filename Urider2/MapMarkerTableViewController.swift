@@ -20,37 +20,51 @@ class MapMarkerTableViewController: UITableViewController, UISearchBarDelegate {
     
     
     struct markerCity {
-        static var currentcity: City!
+        static var currentCity: City!
         static var subset: String!
     }
     
+    var noRidesLabel = UILabel()
+    var directionFlipped = false
+    var viewAll = false
     var searchBar: UISearchBar!
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        searchBar = UISearchBar()
-        searchBar.sizeToFit()
-        searchBar.placeholder = "search for rides"
-        searchBar.delegate = self
+//        searchBar = UISearchBar()
+//        searchBar.sizeToFit()
+//        searchBar.placeholder = "search for rides"
+//        searchBar.delegate = self
         
-        if (markerCity.currentcity.rideList.count == 0) {
-            self.navigationItem.title = "No Rides Found"
-        }
-        else{
-            self.navigationItem.title = markerCity.currentcity.cityInfo.name
-            self.tableView.tableHeaderView = searchBar
-            self.tableView.tableHeaderView?.isOpaque = true
-            self.tableView.tableHeaderView?.tintColor = #colorLiteral(red: 0.3485831618, green: 0.614120543, blue: 1, alpha: 0.6)
+        
+        
+//        if (markerCity.currentCity.rideList.count == 0) {
+//            self.navigationItem.title = "No Rides Found"
+//        }
+        
+        if (markerCity.subset == "View All") {
+            markerCity.subset = "?"
+            viewAll = true
         }
         
-        cellList = markerCity.currentcity.rideList.filter({ (someRide) -> Bool in
-            if (someRide.destination == markerCity.subset) {
-                return true
-            }
-            return false
-        })
+        let nameArray1 = markerCity.currentCity.cityInfo.name.components(separatedBy: ",")
+        let nameArray2 = markerCity.subset.components(separatedBy: ",")
+        
+        self.navigationItem.title = nameArray1[0] + " -> " + nameArray2[0]
+//        self.tableView.tableHeaderView = flipButton
+//        flipButton.sizeToFit()
+        self.tableView.tableHeaderView?.isOpaque = true
+        self.tableView.tableHeaderView?.tintColor = #colorLiteral(red: 0.3485831618, green: 0.614120543, blue: 1, alpha: 0.6)
+        
+        noRidesLabel.frame = CGRect(x: 0, y: 0, width: 200, height: 30)
+        self.view.addSubview(noRidesLabel)
+        noRidesLabel.contentMode = .center
+        noRidesLabel.layer.position = CGPoint(x: self.view.frame.midX, y: self.view.frame.midY)
+        
+        
+        filterRides()
     }
     
     
@@ -69,6 +83,92 @@ class MapMarkerTableViewController: UITableViewController, UISearchBarDelegate {
     // MARK: - Table view data source
     
     
+    func filterRides() {
+        
+        let nameArray1 = markerCity.currentCity.cityInfo.name.components(separatedBy: ",")
+        let nameArray2 = markerCity.subset.components(separatedBy: ",")
+        
+        if (viewAll == false) {
+            if (directionFlipped == false) {
+                self.navigationItem.title = nameArray1[0] + " -> " + nameArray2[0]
+                cellList = markerCity.currentCity.rideList.filter({ (someRide) -> Bool in
+                    if (someRide.destination == markerCity.subset) {
+                        return true
+                    }
+                    return false
+                })
+                
+                if (cellList.count == 0) {
+                    noRidesLabel.text = "No Rides Found"
+                }
+                else {
+                    noRidesLabel.text = ""
+                }
+                
+                self.tableView.reloadData()
+            }
+            
+            if (directionFlipped == true) {
+                self.navigationItem.title = nameArray2[0] + " -> " + nameArray1[0]
+                cellList = markerCity.currentCity.rideList.filter({ (someRide) -> Bool in
+                    if (someRide.origin == markerCity.subset) {
+                        return true
+                    }
+                    return false
+                })
+                
+                if (cellList.count == 0) {
+                    noRidesLabel.text = "No Rides Found"
+                }
+                else {
+                    noRidesLabel.text = ""
+                }
+                
+                self.tableView.reloadData()
+            }
+        }
+        
+        else {
+            if (directionFlipped == false) {
+                self.navigationItem.title = nameArray1[0] + " -> " + nameArray2[0]
+                cellList = markerCity.currentCity.rideList.filter({ (someRide) -> Bool in
+                    if (someRide.origin == markerCity.currentCity.cityInfo.name) {
+                        return true
+                    }
+                    return false
+                })
+                
+                if (cellList.count == 0) {
+                    noRidesLabel.text = "No Rides Found"
+                }
+                else {
+                    noRidesLabel.text = ""
+                }
+                
+                self.tableView.reloadData()
+            }
+            
+            if (directionFlipped == true) {
+                self.navigationItem.title = nameArray2[0] + " -> " + nameArray1[0]
+                cellList = markerCity.currentCity.rideList.filter({ (someRide) -> Bool in
+                    if (someRide.destination == markerCity.currentCity.cityInfo.name) {
+                        return true
+                    }
+                    return false
+                })
+                
+                if (cellList.count == 0) {
+                    noRidesLabel.text = "No Rides Found"
+                }
+                else {
+                    noRidesLabel.text = ""
+                }
+                
+                self.tableView.reloadData()
+            }
+        }
+        
+    }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -84,15 +184,6 @@ class MapMarkerTableViewController: UITableViewController, UISearchBarDelegate {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "markerCell", for: indexPath) as! markerListTableViewCell
-        
-//        //set cell contents
-//        var cellList: [Ride]!
-//        
-//        cellList = barButtonFilteredRides
-//        
-//        if (searchBar.text != "") {
-//            cellList = searchFilteredRides
-//        }
         
         cell.destinationLabel.text = cellList[indexPath.row].destination
         cell.startPointLabel.text = cellList[indexPath.row].origin
@@ -127,57 +218,64 @@ class MapMarkerTableViewController: UITableViewController, UISearchBarDelegate {
         self.performSegue(withIdentifier: "segueToViewRide", sender: self)
     }
     
+    //MARK: flipButton Delegates
     
-    
-    //MARK: searchbar delegates
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        let text = searchBar.text?.lowercased()
-        print("filtering ride/request rides")
-        var empty = false
-        if (text == "") {
-            empty = true
-        }
-        cellList = markerCity.currentcity.rideList.filter({ (someRide) -> Bool in
-            var containsText = empty
-            if (someRide.destination?.lowercased().contains(text!))! {
-                containsText = true
-            }
-            if (someRide.origin?.lowercased().contains(text!))! {
-                containsText = true
-            }
-            if (someRide.date?.lowercased().contains(text!))! {
-                containsText = true
-            }
-            return containsText
-        })
-        tableView.reloadData()
-        return
-    }
-    
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        print("search button clicked")
-        tapGestureDismissKeyboard = UITapGestureRecognizer(target: self, action: #selector(dismissSearchKeyboard))
-        self.view.addGestureRecognizer(tapGestureDismissKeyboard)
+    @IBAction func switchDirection(_ sender: Any) {
+        directionFlipped = !directionFlipped
+        filterRides()
+        
     }
     
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print("search button clicked...")
-        searchBar.resignFirstResponder()
-        dismissSearchKeyboard()
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.text = ""
-        dismissSearchKeyboard()
-    }
-    
-    func dismissSearchKeyboard() {
-        print("resigning search-bar first responder status")
-        searchBar.resignFirstResponder()
-        self.view.removeGestureRecognizer(tapGestureDismissKeyboard)
-    }
+//    //MARK: searchbar delegates
+//    
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        let text = searchBar.text?.lowercased()
+//        print("filtering ride/request rides")
+//        var empty = false
+//        if (text == "") {
+//            empty = true
+//        }
+//        cellList = markerCity.currentCity.rideList.filter({ (someRide) -> Bool in
+//            var containsText = empty
+//            if (someRide.destination?.lowercased().contains(text!))! {
+//                containsText = true
+//            }
+//            if (someRide.origin?.lowercased().contains(text!))! {
+//                containsText = true
+//            }
+//            if (someRide.date?.lowercased().contains(text!))! {
+//                containsText = true
+//            }
+//            return containsText
+//        })
+//        tableView.reloadData()
+//        return
+//    }
+//    
+//    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+//        print("search button clicked")
+//        tapGestureDismissKeyboard = UITapGestureRecognizer(target: self, action: #selector(dismissSearchKeyboard))
+//        self.view.addGestureRecognizer(tapGestureDismissKeyboard)
+//    }
+//    
+//    
+//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//        print("search button clicked...")
+//        searchBar.resignFirstResponder()
+//        dismissSearchKeyboard()
+//    }
+//    
+//    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+//        searchBar.text = ""
+//        dismissSearchKeyboard()
+//    }
+//    
+//    func dismissSearchKeyboard() {
+//        print("resigning search-bar first responder status")
+//        searchBar.resignFirstResponder()
+//        self.view.removeGestureRecognizer(tapGestureDismissKeyboard)
+//    }
 
     
     
@@ -192,7 +290,7 @@ class MapMarkerTableViewController: UITableViewController, UISearchBarDelegate {
             let viewRideVC: viewRideFromTableViewController = segue.destination as! viewRideFromTableViewController
             
             viewRideVC.rideBeingViewed = cellList[indexPath!]
-            viewRideVC.cityInTable = markerCity.currentcity
+            viewRideVC.cityInTable = markerCity.currentCity
         }
     }
  
