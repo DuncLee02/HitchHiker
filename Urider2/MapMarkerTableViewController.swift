@@ -22,6 +22,7 @@ class MapMarkerTableViewController: UITableViewController, UISearchBarDelegate {
     struct markerCity {
         static var currentCity: City!
         static var subset: String!
+        static var Outgoing: Bool!
     }
     
     var noRidesLabel = UILabel()
@@ -63,6 +64,10 @@ class MapMarkerTableViewController: UITableViewController, UISearchBarDelegate {
         noRidesLabel.contentMode = .center
         noRidesLabel.layer.position = CGPoint(x: self.view.frame.midX, y: self.view.frame.midY)
         
+        if (markerCity.Outgoing == false) {
+            filterIngoingRides()
+            return
+        }
         
         filterRides()
     }
@@ -170,6 +175,95 @@ class MapMarkerTableViewController: UITableViewController, UISearchBarDelegate {
         
     }
     
+    
+    
+    func filterIngoingRides() {
+        
+        let nameArray1 = markerCity.currentCity.cityInfo.name.components(separatedBy: ",")
+        let nameArray2 = markerCity.subset.components(separatedBy: ",")
+        
+        if (viewAll == false) {
+            if (directionFlipped == false) {
+                self.navigationItem.title = nameArray2[0] + " -> " + nameArray1[0]
+                cellList = markerCity.currentCity.rideList.filter({ (someRide) -> Bool in
+                    if (someRide.origin == markerCity.subset) {
+                        return true
+                    }
+                    return false
+                })
+                
+                if (cellList.count == 0) {
+                    noRidesLabel.text = "No Rides Found"
+                }
+                else {
+                    noRidesLabel.text = ""
+                }
+                
+                self.tableView.reloadData()
+            }
+            
+            if (directionFlipped == true) {
+                self.navigationItem.title = nameArray1[0] + " -> " + nameArray2[0]
+                cellList = markerCity.currentCity.rideList.filter({ (someRide) -> Bool in
+                    if (someRide.destination == markerCity.subset) {
+                        return true
+                    }
+                    return false
+                })
+                
+                if (cellList.count == 0) {
+                    noRidesLabel.text = "No Rides Found"
+                }
+                else {
+                    noRidesLabel.text = ""
+                }
+                
+                self.tableView.reloadData()
+            }
+        }
+            
+        else {
+            if (directionFlipped == false) {
+                self.navigationItem.title = nameArray2[0] + " -> " + nameArray1[0]
+                cellList = markerCity.currentCity.rideList.filter({ (someRide) -> Bool in
+                    if (someRide.destination == markerCity.currentCity.cityInfo.name) {
+                        return true
+                    }
+                    return false
+                })
+                
+                if (cellList.count == 0) {
+                    noRidesLabel.text = "No Rides Found"
+                }
+                else {
+                    noRidesLabel.text = ""
+                }
+                
+                self.tableView.reloadData()
+            }
+            
+            if (directionFlipped == true) {
+                self.navigationItem.title = nameArray1[0] + " -> " + nameArray2[0]
+                cellList = markerCity.currentCity.rideList.filter({ (someRide) -> Bool in
+                    if (someRide.origin == markerCity.currentCity.cityInfo.name) {
+                        return true
+                    }
+                    return false
+                })
+                
+                if (cellList.count == 0) {
+                    noRidesLabel.text = "No Rides Found"
+                }
+                else {
+                    noRidesLabel.text = ""
+                }
+                
+                self.tableView.reloadData()
+            }
+        }
+        
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -222,8 +316,12 @@ class MapMarkerTableViewController: UITableViewController, UISearchBarDelegate {
     
     @IBAction func switchDirection(_ sender: Any) {
         directionFlipped = !directionFlipped
-        filterRides()
-        
+        if markerCity.Outgoing == true {
+            filterRides()
+            return
+        }
+        filterIngoingRides()
+                
     }
     
     

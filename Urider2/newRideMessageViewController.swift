@@ -69,7 +69,6 @@ class newRideMessageViewController: UIViewController, UITextViewDelegate {
         let ref = FIRDatabase.database().reference()
         //ref.child("ridesDuncan").childByAutoId().setValue(RideDict)
         
-        let email = FIRAuth.auth()?.currentUser?.email
         let uuid = UUID().uuidString
         
         ref.child("ridesDuncan").child(rideToBeAdded.destination!).child(uuid).setValue(RideDict)

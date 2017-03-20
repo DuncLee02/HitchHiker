@@ -45,7 +45,7 @@ class viewRideFromTableViewController: UIViewController {
         
         acceptRideButton.layer.masksToBounds = true
         acceptRideButton.layer.cornerRadius = 8
-        acceptRideButton.addTarget(self, action: Selector("acceptRidePressed"), for: UIControlEvents.touchUpInside)
+        acceptRideButton.addTarget(self, action: #selector(viewRideFromTableViewController.acceptRidePressed), for: UIControlEvents.touchUpInside)
         
         print("loading values from tableviewcontroller...")
         

@@ -32,7 +32,7 @@ class EditRideMessageViewController: UIViewController, UITextViewDelegate {
         messageForRide.layer.cornerRadius = 8
         messageForRide.text = rideBeingCreated.message
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: Selector(("dismissKeyboard")))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(EditRideMessageViewController.dismissKeyboard))
         self.view.addGestureRecognizer(tapGesture)
         
         // Do any additional setup after loading the view.

@@ -14,4 +14,5 @@ class Destination: NSObject {
     var rides = 0
     var requests = 0
     var destination: CLLocationCoordinate2D!
+    var outgoing = true
 }
