@@ -44,12 +44,13 @@ class newRideMessageViewController: UIViewController, UITextViewDelegate {
     @IBAction func doneButtonPressed(_ sender: Any) {
         rideToBeAdded.message = messageForRide.text
         
-        print(FIRAuth.auth()?.currentUser?.email as Any)
+        let author = LoginViewController.currentUser.email
+        let UID = LoginViewController.currentUser.uid
         
-        let author = FIRAuth.auth()?.currentUser?.email!
         
         //removed "riders" : ""
-        let aRideDict = [ "date": rideToBeAdded.date!, "destination": rideToBeAdded.destination!, "isPassenger": rideToBeAdded.isPassenger!, "seats": rideToBeAdded.seats!, "origin": rideToBeAdded.origin!, "time": rideToBeAdded.time!, "oneWay": rideToBeAdded.oneWay!, "message": rideToBeAdded.message!, "seatsTaken": 0, "author": author!, "origLat": rideToBeAdded.origCoordinates!.latitude as Double, "origLong": rideToBeAdded.origCoordinates!.longitude as Double,  "destLat": rideToBeAdded.destCoordinates!.latitude as Double, "destLong": rideToBeAdded.destCoordinates!.longitude as Double] as [String : Any]
+        let aRideDict = [ "date": rideToBeAdded.date!, "destination": rideToBeAdded.destination!, "isPassenger": rideToBeAdded.isPassenger!, "seats": rideToBeAdded.seats!, "origin": rideToBeAdded.origin!, "time": rideToBeAdded.time!, "oneWay": rideToBeAdded.oneWay!, "message": rideToBeAdded.message!, "seatsTaken": 0, "author": author, "origLat": rideToBeAdded.origCoordinates!.latitude as Double, "origLong": rideToBeAdded.origCoordinates!.longitude as Double,  "destLat": rideToBeAdded.destCoordinates!.latitude as Double, "destLong": rideToBeAdded.destCoordinates!.longitude as Double, "UID": UID] as [String : Any]
+        
         print(aRideDict)
         
         writeToRides(RideDict: aRideDict)
@@ -75,7 +76,7 @@ class newRideMessageViewController: UIViewController, UITextViewDelegate {
         
         ref.child("ridesDuncan").child(rideToBeAdded.origin!).child(uuid).setValue(RideDict)
         
-        ref.child("userRides").child(LoginViewController.currentUser.uid).child(uuid).setValue(RideDict)
+        ref.child("userRides").child(LoginViewController.currentUser.uid).child("posted").child(uuid).setValue(RideDict)
         
         //checking/adding origin location
         ref.child("locationsDuncan").child(rideToBeAdded.origin!).observeSingleEvent(of: .value, with: { (snapshot) in

@@ -30,7 +30,7 @@ class EditRideMessageViewController: UIViewController, UITextViewDelegate {
         messageForRide.layer.masksToBounds = true
         messageForRide.layer.borderWidth = 4
         messageForRide.layer.cornerRadius = 8
-        messageForRide.text = rideBeingCreated.message
+        messageForRide.text = rideBeingEdited.message
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(EditRideMessageViewController.dismissKeyboard))
         self.view.addGestureRecognizer(tapGesture)
@@ -44,11 +44,19 @@ class EditRideMessageViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func doneButtonPressed(_ sender: Any) {
+        
         rideBeingCreated.message = messageForRide.text
         
-        let author = FIRAuth.auth()?.currentUser?.email!
         
-        let aRideDict = [ "date": rideBeingCreated.date!, "destination": rideBeingCreated.destination!, "isPassenger": rideBeingCreated.isPassenger!, "seats": rideBeingCreated.seats!, "origin": rideBeingCreated.origin!, "time": rideBeingCreated.time!, "oneWay": rideBeingCreated.oneWay!, "message": rideBeingCreated.message!, "seatsTaken": 0, "author": author!] as [String : Any]
+        var riderDict = [String: Any]()
+        for Riders in rideBeingCreated.riders! {
+            
+            riderDict.updateValue(Riders.email, forKey: Riders.uid)
+            
+        }
+        
+        
+        let aRideDict = [ "date": rideBeingCreated.date!, "destination": rideBeingCreated.destination!, "isPassenger": rideBeingCreated.isPassenger!, "seats": rideBeingCreated.seats!, "origin": rideBeingCreated.origin!, "time": rideBeingCreated.time!, "oneWay": rideBeingCreated.oneWay!, "message": rideBeingCreated.message!, "seatsTaken": 0, "author": rideBeingCreated.author!, "origLat": rideBeingCreated.origCoordinates!.latitude as Double, "origLong": rideBeingCreated.origCoordinates!.longitude as Double,  "destLat": rideBeingCreated.destCoordinates!.latitude as Double, "destLong": rideBeingCreated.destCoordinates!.longitude as Double, "riders": riderDict, "UID": rideBeingCreated.creatorUID!] as [String : Any]
         
         editRide(RideDict: aRideDict)
         
@@ -65,11 +73,28 @@ class EditRideMessageViewController: UIViewController, UITextViewDelegate {
     func editRide(RideDict: [String: Any]) {
         print("sending data")
         let ref = FIRDatabase.database().reference()
-        ref.child("ridesDuncan").child(rideBeingEdited.key!).removeValue()
-        ref.child("ridesDuncan").childByAutoId().setValue(RideDict)
-//        print(RideDict)
-        YourRidesViewController.globalYourRideList.yourRideList.remove(at: YourRidesViewController.globalYourRideList.yourRideList.index(of: self.rideBeingEdited)!)
-        YourRidesViewController.globalYourRideList.yourRideList.append(self.rideBeingCreated)
+        
+        print(rideBeingEdited.destination!)
+        print(rideBeingEdited.key!)
+//        //remove old values
+//        ref.child("ridesDuncan").child(rideBeingEdited.destination!).child(rideBeingEdited.key!).removeValue()
+//        
+//        ref.child("ridesDuncan").child(rideBeingEdited.origin!).child(rideBeingEdited.key!).removeValue()
+//        
+        //insert new values
+        ref.child("ridesDuncan").child(rideBeingCreated.origin!).child(rideBeingEdited.key!).setValue(RideDict)
+        ref.child("ridesDuncan").child(rideBeingCreated.destination!).child(rideBeingEdited.key!).setValue(RideDict)
+        ref.child("userRides").child(LoginViewController.currentUser.uid).child("posted").child(rideBeingEdited.key!).setValue(RideDict)
+
+        
+        let index = YourRidesViewController.globalYourRideList.yourRideList.index(of: self.rideBeingEdited)!
+        YourRidesViewController.globalYourRideList.yourRideList.remove(at: index)
+        YourRidesViewController.globalYourRideList.yourRideList.insert(rideBeingCreated, at: index)
+        
+        //changes values in all users's acceptedRide List
+        for riderItr in rideBeingCreated.riders! {
+            ref.child("userRides").child(riderItr.uid).child("accepted").child(self.rideBeingEdited.key!).setValue(RideDict)
+        }
         
     }
     

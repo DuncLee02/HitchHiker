@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Urider2
+//@testable import Urider2
 
 class Urider2Tests: XCTestCase {
     

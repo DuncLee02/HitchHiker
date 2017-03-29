@@ -293,6 +293,7 @@ class MapMarkerTableViewController: UITableViewController, UISearchBarDelegate {
         
         if (cellList[indexPath.row].isPassenger == true) {
             cell.rideOrRequestIcon.image = #imageLiteral(resourceName: "PassengerIcon.png")
+            cell.numberSeatsLabel.text = "0"
             //print("inserting icon...")
         }
         else {

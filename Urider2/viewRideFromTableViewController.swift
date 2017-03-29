@@ -60,7 +60,9 @@ class viewRideFromTableViewController: UIViewController {
         if rideBeingViewed.isPassenger == true {
             self.driverOrPassengerImage.image = #imageLiteral(resourceName: "PassengerIcon.png")
             self.rideOrRequestLabel.text = "Request"
+            self.acceptRideButton.isHidden = true
         }
+            
         else {
             self.driverOrPassengerImage.image = #imageLiteral(resourceName: "steeringWheelIcon.jpeg")
             self.rideOrRequestLabel.text = "Ride"
@@ -72,13 +74,12 @@ class viewRideFromTableViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-    
    
     
     func acceptRidePressed() {
         
         ref = FIRDatabase.database().reference()
-        let email = FIRAuth.auth()?.currentUser?.email
+        let currentUserUID = LoginViewController.currentUser.uid
                 
         if((rideBeingViewed.riders?.count)! >= rideBeingViewed.seats!){
             print("ride is full...")
@@ -93,58 +94,88 @@ class viewRideFromTableViewController: UIViewController {
             return
         }
         
-        if (rideBeingViewed.riders?.contains(email!))! {
-            let alert = UIAlertController(title: "Already Accepted", message: "You have already accepted this ride", preferredStyle: .alert)
-            let dismissButton = UIAlertAction(title: "dismiss", style: UIAlertActionStyle.default, handler: {
-                (_)in
-                alert.dismiss(animated: true, completion: nil)
-                print("dismiss alert")
-            })
-            alert.addAction(dismissButton)
-            self.present(alert, animated: true, completion: nil)
-            return
-
-        }
+//        var contains = false
+//        for riders in rideBeingViewed.riders! {
+//            if riders.uid == currentUserUID {
+//                contains = true
+//            }
+//        }
+//        
+//        if ( contains ) {
+//            let alert = UIAlertController(title: "Already Accepted", message: "You have already accepted this ride", preferredStyle: .alert)
+//            let dismissButton = UIAlertAction(title: "dismiss", style: UIAlertActionStyle.default, handler: {
+//                (_)in
+//                alert.dismiss(animated: true, completion: nil)
+//                print("dismiss alert")
+//            })
+//            alert.addAction(dismissButton)
+//            self.present(alert, animated: true, completion: nil)
+//            return
+//
+//        }
        
         print("accepting ride...")
-        rideBeingViewed.riders?.append(email!)
-        if (rideBeingViewed.destination == cityInTable.cityInfo.name) {
-            
-            for cities in MapViewController.mapViewRideList.cityList {
-                if (cities.cityInfo.name == rideBeingViewed.origin) {
-                    print("in city \(cities.cityInfo.name)")
-                    for rides in cities.rideList {
-                        if (rides.key == rideBeingViewed.key) {
-                            rides.riders?.append(email!)
-                            print("appended")
-                            break
-                        }
-                    }
-                }
-            }
-            
-        }
-            
-        else {
-            
-            for cities in MapViewController.mapViewRideList.cityList {
-                if (cities.cityInfo.name == rideBeingViewed.destination) {
-                    print("in city \(cities.cityInfo.name)")
-                    for rides in cities.rideList {
-                        if (rides.key == rideBeingViewed.key) {
-                            rides.riders?.append(email!)
-                            print("appended")
-                            break
-                        }
-                    }
-                }
-            }
-            
-        }
+        
+        let newRider = Rider()
+        newRider.email = LoginViewController.currentUser.email
+        newRider.uid = LoginViewController.currentUser.uid
+        
+//        rideBeingViewed.riders?.append(newRider)
+//        if (rideBeingViewed.destination == cityInTable.cityInfo.name) {
+//            
+//            for cities in MapViewController.mapViewRideList.cityList {
+//                if (cities.cityInfo.name == rideBeingViewed.origin) {
+//                    print("in city \(cities.cityInfo.name)")
+//                    for rides in cities.rideList {
+//                        if (rides.key == rideBeingViewed.key) {
+//                            rides.riders?.append(newRider)
+//                            print("appended")
+//                            break
+//                        }
+//                    }
+//                }
+//            }
+//            
+//        }
+//            
+//        else {
+//            
+//            for cities in MapViewController.mapViewRideList.cityList {
+//                if (cities.cityInfo.name == rideBeingViewed.destination) {
+//                    print("in city \(cities.cityInfo.name)")
+//                    for rides in cities.rideList {
+//                        if (rides.key == rideBeingViewed.key) {
+//                            rides.riders?.append(newRider)
+//                            print("appended")
+//                            break
+//                        }
+//                    }
+//                }
+//            }
+//            
+//        }
+        
+        let alert = UIAlertController(title: "Ride Accepted", message: "", preferredStyle: .alert)
+        let dismissButton = UIAlertAction(title: "dismiss", style: UIAlertActionStyle.default, handler: {
+            (_)in
+            alert.dismiss(animated: true, completion: nil)
+            print("dismiss")
+        })
+        alert.addAction(dismissButton)
+        self.present(alert, animated: true, completion: nil)
+        
 //        rideBeingViewed.riders
-        ref.child("ridesDuncan").child(rideBeingViewed.destination!).child(rideBeingViewed.key!).child("riders").childByAutoId().setValue(email!)
-        ref.child("ridesDuncan").child(rideBeingViewed.origin!).child(rideBeingViewed.key!).child("riders").childByAutoId().setValue(email!)
+//        ref.child("ridesDuncan").child(rideBeingViewed.destination!).child(rideBeingViewed.key!).child("riders").child(LoginViewController.currentUser.uid).setValue(currentUserEmail)
+//        ref.child("ridesDuncan").child(rideBeingViewed.origin!).child(rideBeingViewed.key!).child("riders").child(LoginViewController.currentUser.uid).setValue(currentUserEmail)
+        
+        ref.child("userRides").child(rideBeingViewed.creatorUID!).child("posted").child(rideBeingViewed.key!).child("riders").child(LoginViewController.currentUser.uid).setValue(LoginViewController.currentUser.email)
+        
+        let aRideDict = [ "date": rideBeingViewed.date!, "destination": rideBeingViewed.destination!, "isPassenger": rideBeingViewed.isPassenger!, "seats": rideBeingViewed.seats!, "origin": rideBeingViewed.origin!, "time": rideBeingViewed.time!, "oneWay": rideBeingViewed.oneWay!, "message": rideBeingViewed.message!, "seatsTaken": 0, "author": rideBeingViewed.author!, "origLat": rideBeingViewed.origCoordinates!.latitude as Double, "origLong": rideBeingViewed.origCoordinates!.longitude as Double,  "destLat": rideBeingViewed.destCoordinates!.latitude as Double, "destLong": rideBeingViewed.destCoordinates!.longitude as Double, "UID": rideBeingViewed.creatorUID!] as [String : Any]
+        
+        ref.child("userRides").child(LoginViewController.currentUser.uid).child("accepted").child(rideBeingViewed.key!).setValue(aRideDict)
+        
     }
+    
     
 
     override func didReceiveMemoryWarning() {

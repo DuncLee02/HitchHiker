@@ -120,7 +120,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             return;
         }
         
-        let userRef = ref.child("usersDuncan").queryEqual(toValue: userEmail).observe(.value, with: { (snapshot) in
+    ref.child("usersDuncan").queryEqual(toValue: userEmail).observe(.value, with: { (snapshot) in
             if (snapshot.exists() == true) {
                 print("user has been found")
                 //self.performSegue(withIdentifier: "SegueToTable", sender: self)

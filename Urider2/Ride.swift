@@ -19,8 +19,9 @@ class Ride: NSObject {
     var origin: String?
     var message: String?
     var author : String?
+    var creatorUID: String?
     var key: String?
-    var riders: [String]?
+    var riders: [Rider]?
     
     var destCoordinates: CLLocationCoordinate2D?
     var origCoordinates: CLLocationCoordinate2D?

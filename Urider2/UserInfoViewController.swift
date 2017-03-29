@@ -73,8 +73,8 @@ class UserInfoViewController: UIViewController {
         //                let indexOfEdu = userEmail?.range(of: ".edu")
         let indexOfEdu = school?.index( (school?.endIndex)! , offsetBy: -4 )
         school = school?.substring(to: (indexOfEdu)!)
-        print(school)
-        let dictionary = ["email": userEmail!, "school": school!, "name": name!, "lat": defaultPlace.coordinate.latitude, "lon": defaultPlace.coordinate.longitude] as [String : Any]
+        print(school!)
+        let dictionary = ["email": userEmail!, "school": school!, "name": name!, "lat": defaultPlace.coordinate.latitude, "lon": defaultPlace.coordinate.longitude, "defaultName": defaultPlace.name] as [String : Any]
         print(dictionary)
         ref.child("usersDuncan").child(LoginViewController.currentUser.uid).setValue(dictionary)
         LoginViewController.currentUser.email = userEmail!

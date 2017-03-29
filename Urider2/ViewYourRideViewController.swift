@@ -19,19 +19,17 @@ class ViewYourRideViewController: UIViewController {
     @IBOutlet weak var backgroundLabel: UILabel!
     @IBOutlet weak var messageAboutRideTextView: UITextView!
     
-    
-    
-    
-    
     @IBOutlet weak var roundTripImage: UIImageView!
     @IBOutlet weak var driverOrPassengerImage: UIImageView!
     
     
+    @IBOutlet weak var viewRiderInfoButton: UIButton!
     @IBOutlet weak var EditRideButton: UIButton!
     @IBOutlet weak var DeleteRideButton: UIButton!
     
     var rideBeingViewed: Ride!
     var ref: FIRDatabaseReference!
+    var isAcceptedRide: Bool!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,23 +64,64 @@ class ViewYourRideViewController: UIViewController {
             self.roundTripImage.image = #imageLiteral(resourceName: "roundTrip.png")
         }
         
+        if (isAcceptedRide == true) {
+            EditRideButton.isHidden = true
+            viewRiderInfoButton.isHidden = true
+            DeleteRideButton.setTitle("Remove Ride", for: .normal)
+        }
 
         // Do any additional setup after loading the view.
+    }
+    
+    func removeSelfFromRide() {
+        ref.child("ridesDuncan").child(rideBeingViewed.destination!).child(rideBeingViewed.key!).child("riders").child(LoginViewController.currentUser.uid).removeValue()
+        ref.child("ridesDuncan").child(rideBeingViewed.origin!).child(rideBeingViewed.key!).child("riders").child(LoginViewController.currentUser.uid).removeValue()
+        
+        ref.child("userRides").child(rideBeingViewed.creatorUID!).child("posted").child(rideBeingViewed.key!).child("riders").child(LoginViewController.currentUser.uid).removeValue()
+        ref.child("userRides").child(rideBeingViewed.creatorUID!).child("accepted").child(rideBeingViewed.key!).removeValue()
+        
     }
 
     //MARK: button actions
     
 
     @IBAction func deleteButtonPressed(_ sender: Any) {
+        
+        if (isAcceptedRide == true) {
+            
+            
+            let alert = UIAlertController(title: "Remove", message: "are you sure you'd like to remove yourself from this ride?", preferredStyle: .alert)
+            let yesAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default, handler: {
+                (_)in
+                alert.dismiss(animated: true, completion: nil)
+                self.removeSelfFromRide()
+                _ = self.navigationController?.popViewController(animated: true)
+                
+            })
+            let noAction = UIAlertAction(title: "No", style: UIAlertActionStyle.default, handler: {
+                (_)in
+                alert.dismiss(animated: true, completion: nil)
+                print("dismiss alert")
+            })
+            alert.addAction(yesAction)
+            alert.addAction(noAction)
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        
         let alert = UIAlertController(title: "DELETE", message: "are you sure you'd like to delete your ride?", preferredStyle: .alert)
         let yesAction = UIAlertAction(title: "yes", style: UIAlertActionStyle.default, handler: {
             (_)in
             alert.dismiss(animated: true, completion: nil)
-//            self.ref.child("ridesDuncan").child(self.rideBeingViewed.key!).removeValue()
-//            YourRidesViewController.globalYourRideList.yourRideList.remove(at: YourRidesViewController.globalYourRideList.yourRideList.index(of: self.rideBeingViewed)!)
+            
             self.ref.child("ridesDuncan").child(self.rideBeingViewed.destination!).child(self.rideBeingViewed.key!).removeValue()
             self.ref.child("ridesDuncan").child(self.rideBeingViewed.origin!).child(self.rideBeingViewed.key!).removeValue()
-            self.ref.child("userRides").child(LoginViewController.currentUser.uid).child(self.rideBeingViewed.key!).removeValue()
+            self.ref.child("userRides").child(LoginViewController.currentUser.uid).child("poster").child(self.rideBeingViewed.key!).removeValue()
+            
+            //removes all accepted rides
+            for Riders in self.rideBeingViewed.riders! {
+                self.ref.child("userRides").child(Riders.uid).child("accepted").child(self.rideBeingViewed.key!).removeValue()
+            }
             
             //decrement city ridecounts
             for cities in MapViewController.mapViewRideList.cityList {
@@ -134,7 +173,7 @@ class ViewYourRideViewController: UIViewController {
         
         if (segue.identifier == "segueToViewRiders") {
             let rideInfoVC: riderInfoViewController = segue.destination as! riderInfoViewController
-            rideInfoVC.riderInfo = rideBeingViewed.riders
+            rideInfoVC.ride = rideBeingViewed
         }
     }
     

@@ -26,6 +26,9 @@ class EditRideViewController: UIViewController, UITextFieldDelegate, UIPickerVie
     var petsProhibited: Bool = true
     var oneWayTrip: Bool = true
     
+    var rideDest: CLLocationCoordinate2D!
+    var rideOrig: CLLocationCoordinate2D!
+    
     
     var rideBeingEdited: Ride!
     var rideBeingCreated: Ride!
@@ -76,6 +79,9 @@ class EditRideViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         OriginLabel.delegate = self
         DestinationLabel.delegate = self
         PassengersLabel.text = "0"
+        
+        rideOrig = rideBeingEdited.origCoordinates
+        rideDest = rideBeingEdited.destCoordinates
         
         //initialize textfield values
         DateLabel.text = rideBeingEdited.date
@@ -131,7 +137,7 @@ class EditRideViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         
         passengerPickerDataSource = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: Selector(("dismissDateFieldPicker")))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(EditRideViewController.dismissDateFieldPicker))
         self.view.addGestureRecognizer(tapGesture)
     }
     
@@ -174,6 +180,15 @@ class EditRideViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         print("loading data...")
         
         rideBeingCreated = Ride()
+        
+        rideBeingCreated.author = rideBeingEdited.author
+        rideBeingCreated.riders = rideBeingEdited.riders
+        rideBeingCreated.seatsTaken = rideBeingEdited.seatsTaken
+        rideBeingCreated.key = rideBeingEdited.key
+        rideBeingCreated.creatorUID = rideBeingEdited.creatorUID
+        
+        rideBeingCreated.destCoordinates = rideDest
+        rideBeingCreated.origCoordinates = rideOrig
         
         rideBeingCreated.date = DateLabel.text
         rideBeingCreated.seats = Int(PassengersLabel.text!)
@@ -381,10 +396,12 @@ extension EditRideViewController: GMSAutocompleteResultsViewControllerDelegate {
         print("Place attributions: \(place.attributions)")
         if (resultsController == resultsViewControllerOrigin) {
             searchControllerOrigin.searchBar.text = place.formattedAddress!
+            rideOrig = place.coordinate
             print("Origin is " + place.formattedAddress!)
         }
         if (resultsController == resultsViewControllerDestination) {
             searchControllerDestination.searchBar.text = place.formattedAddress!
+            rideDest = place.coordinate
             print("Destination is " + place.formattedAddress!)
         }
         dismiss(animated: true, completion: nil)

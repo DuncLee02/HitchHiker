@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4821D1F71E4C07EA001267AE /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4821D1F61E4C07EA001267AE /* UserInfoViewController.swift */; };
 		482415FC1E674B1B00DFF8BD /* newCity.png in Resources */ = {isa = PBXBuildFile; fileRef = 482415FB1E674B1B00DFF8BD /* newCity.png */; };
+		4826F6511E85DE5100B5EF26 /* Rider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4826F6501E85DE5100B5EF26 /* Rider.swift */; };
 		4839628D1E28469900AD73FA /* steeringWheelIcon.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 4839628C1E28469900AD73FA /* steeringWheelIcon.jpeg */; };
 		4839628F1E2847D700AD73FA /* PassengerIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4839628E1E2847D700AD73FA /* PassengerIcon.png */; };
 		486BBDDC1E782BDD009B0C74 /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486BBDDB1E782BDD009B0C74 /* Destination.swift */; };
@@ -32,6 +33,7 @@
 		488D49D11E4AB9E50086A760 /* riderInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488D49D01E4AB9E50086A760 /* riderInfoViewController.swift */; };
 		488D49D31E4ABBAD0086A760 /* riderInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488D49D21E4ABBAD0086A760 /* riderInfoTableViewCell.swift */; };
 		489D54BA1E25FDB00049E612 /* viewRideFromTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489D54B91E25FDB00049E612 /* viewRideFromTableViewController.swift */; };
+		48ACD9AE1E84AFC2000E7615 /* editUserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48ACD9AD1E84AFC2000E7615 /* editUserInfoViewController.swift */; };
 		48B3E8BA1E2E78C300774E2B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B3E8B91E2E78C300774E2B /* SettingsViewController.swift */; };
 		48BCCEE71E26D1BA0039A43A /* checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 48BCCEE61E26D1BA0039A43A /* checked.png */; };
 		48BCCEEE1E26F7DB0039A43A /* roundTrip.png in Resources */ = {isa = PBXBuildFile; fileRef = 48BCCEED1E26F7DB0039A43A /* roundTrip.png */; };
@@ -80,6 +82,7 @@
 /* Begin PBXFileReference section */
 		4821D1F61E4C07EA001267AE /* UserInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		482415FB1E674B1B00DFF8BD /* newCity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newCity.png; sourceTree = "<group>"; };
+		4826F6501E85DE5100B5EF26 /* Rider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rider.swift; sourceTree = "<group>"; };
 		4839628C1E28469900AD73FA /* steeringWheelIcon.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = steeringWheelIcon.jpeg; sourceTree = "<group>"; };
 		4839628E1E2847D700AD73FA /* PassengerIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PassengerIcon.png; sourceTree = "<group>"; };
 		483962901E293A0A00AD73FA /* newRideMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = newRideMessageViewController.swift; sourceTree = "<group>"; };
@@ -104,6 +107,7 @@
 		488D49D01E4AB9E50086A760 /* riderInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = riderInfoViewController.swift; sourceTree = "<group>"; };
 		488D49D21E4ABBAD0086A760 /* riderInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = riderInfoTableViewCell.swift; sourceTree = "<group>"; };
 		489D54B91E25FDB00049E612 /* viewRideFromTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = viewRideFromTableViewController.swift; sourceTree = "<group>"; };
+		48ACD9AD1E84AFC2000E7615 /* editUserInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = editUserInfoViewController.swift; sourceTree = "<group>"; };
 		48B3E8B91E2E78C300774E2B /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		48BCCEE61E26D1BA0039A43A /* checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = checked.png; path = ../../../Downloads/checked.png; sourceTree = "<group>"; };
 		48BCCEED1E26F7DB0039A43A /* roundTrip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = roundTrip.png; path = ../../../Desktop/icons/roundTrip.png; sourceTree = "<group>"; };
@@ -179,6 +183,7 @@
 				486FAD3F1E6225D000268884 /* City.swift */,
 				486BBDDB1E782BDD009B0C74 /* Destination.swift */,
 				486BBDED1E7B15AC009B0C74 /* Arrow.swift */,
+				4826F6501E85DE5100B5EF26 /* Rider.swift */,
 			);
 			name = Classes;
 			path = ..;
@@ -188,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				48B3E8B91E2E78C300774E2B /* SettingsViewController.swift */,
+				48ACD9AD1E84AFC2000E7615 /* editUserInfoViewController.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -597,6 +603,7 @@
 			files = (
 				48E88D851E662CFE000750C2 /* HomeViewController.swift in Sources */,
 				48F6BE651E33C53F0089A301 /* EditRideViewController.swift in Sources */,
+				4826F6511E85DE5100B5EF26 /* Rider.swift in Sources */,
 				48F6BE621E30311F0089A301 /* ViewYourRideViewController.swift in Sources */,
 				48F59E2F1E20043D008B4A73 /* MenuController.swift in Sources */,
 				48F59E301E20043D008B4A73 /* NewsTableViewCell.swift in Sources */,
@@ -608,6 +615,7 @@
 				48F59E381E200585008B4A73 /* Ride.swift in Sources */,
 				48F59E031E1FF642008B4A73 /* LoginViewController.swift in Sources */,
 				488D49D11E4AB9E50086A760 /* riderInfoViewController.swift in Sources */,
+				48ACD9AE1E84AFC2000E7615 /* editUserInfoViewController.swift in Sources */,
 				48B3E8BA1E2E78C300774E2B /* SettingsViewController.swift in Sources */,
 				48F59E011E1FF642008B4A73 /* AppDelegate.swift in Sources */,
 				489D54BA1E25FDB00049E612 /* viewRideFromTableViewController.swift in Sources */,

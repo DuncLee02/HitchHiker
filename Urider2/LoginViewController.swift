@@ -22,6 +22,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         static var school = ""
         static var email = ""
         static var defaultPlace: CLLocationCoordinate2D!
+        static var defaultName = ""
     }
 
     @IBOutlet weak var SignInButton: GIDSignInButton!
@@ -55,6 +56,9 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     }
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        
+
+        
         print("logging in...")
         if let error = error {
             print(error.localizedDescription)
@@ -81,7 +85,14 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         let ref = FIRDatabase.database().reference()
         
         if (userEmail?.hasSuffix(".edu") == false) {
-            print("not a school email")
+            print(userEmail! + " is not a school email")
+            let firebaseAuth = FIRAuth.auth()
+            do {
+                try firebaseAuth?.signOut()
+                GIDSignIn.sharedInstance().signOut()
+            } catch let signOutError as NSError {
+                print ("Error signing out: %@", signOutError)
+            }
             return;
         }
         
@@ -95,6 +106,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
                     let latitude = dictionary["lat"] as! Double
                     let longitude = dictionary["lon"] as! Double
                     currentUser.defaultPlace = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                    currentUser.defaultName = dictionary["defaultName"] as! String
                     self.performSegue(withIdentifier: "SegueToTable", sender: self)
                     return
                 }

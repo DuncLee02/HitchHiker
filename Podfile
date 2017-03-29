@@ -13,6 +13,7 @@ target 'Urider2' do
   pod 'GooglePlaces'
   pod 'GooglePlacePicker'
   pod 'GoogleMaps'
+  #pod 'Koyomi'
   #pod 'Google/Analytics'
 
   target 'Urider2Tests' do

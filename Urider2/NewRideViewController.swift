@@ -68,6 +68,7 @@ class NewRideViewController: UIViewController, UITextFieldDelegate, UIPickerView
     @IBOutlet weak var requestBooleanButton: UIButton!
     @IBOutlet weak var oneWaySwitch: UISwitch!
     
+    @IBOutlet weak var backgroundAlertView: UIView!
     
     
     
@@ -80,7 +81,7 @@ class NewRideViewController: UIViewController, UITextFieldDelegate, UIPickerView
         DateLabel.delegate = self
         TimeLabel.delegate = self
         PassengersLabel.delegate = self
-        PassengersLabel.text = "0"
+        PassengersLabel.text = "1"
         
         //initialize textfield values
         let date = NSDate()
@@ -106,7 +107,7 @@ class NewRideViewController: UIViewController, UITextFieldDelegate, UIPickerView
         resultsViewControllerOrigin.autocompleteFilter = filter    //remove this to allow specific address
         searchControllerOrigin = UISearchController(searchResultsController: resultsViewControllerOrigin)
         searchControllerOrigin.searchBar.placeholder = "enter origin city"
-        //searchControllerOrigin.searchBar.prompt = "Origin"
+        searchControllerOrigin.searchBar.backgroundColor = customBlue()
         searchControllerOrigin.searchBar.backgroundImage = UIImage()
         searchControllerOrigin.searchResultsUpdater = resultsViewControllerOrigin
         
@@ -123,11 +124,11 @@ class NewRideViewController: UIViewController, UITextFieldDelegate, UIPickerView
         searchControllerDestination = UISearchController(searchResultsController: resultsViewControllerDestination)
         searchControllerDestination.searchBar.placeholder = "enter destination city"
         searchControllerDestination.searchBar.backgroundImage = UIImage()
-        //searchControllerDestination.searchBar.prompt = "Destination"
+        searchControllerDestination.searchBar.backgroundColor = customBlue()
         searchControllerDestination.searchResultsUpdater = resultsViewControllerDestination
         
         let subView2 = UIView(frame: CGRect(x: self.view.frame.midX, y: 105, width: view.frame.width, height: 45.0))
-        subView2.layer.position = CGPoint(x: self.view.frame.midX, y: 110)
+        subView2.layer.position = CGPoint(x: self.view.frame.midX, y: 124)
         subView2.addSubview((searchControllerDestination.searchBar))
         view.addSubview(subView2)
         searchControllerDestination.searchBar.sizeToFit()
@@ -152,7 +153,7 @@ class NewRideViewController: UIViewController, UITextFieldDelegate, UIPickerView
         }
         
         
-        passengerPickerDataSource = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
+        passengerPickerDataSource = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector((dismissDateFieldPicker)))
         self.view.addGestureRecognizer(tapGesture)
@@ -170,6 +171,11 @@ class NewRideViewController: UIViewController, UITextFieldDelegate, UIPickerView
                 "No ride-type checked", preferredStyle: UIAlertControllerStyle.alert)
             alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
             self.present(alertController, animated: true, completion: nil)
+            
+            self.backgroundAlertView.layer.borderWidth = 2
+            self.backgroundAlertView.layer.borderColor = customAlertRed().cgColor
+            self.backgroundAlertView.layer.cornerRadius = 8
+            
             return
         }
         
@@ -179,6 +185,7 @@ class NewRideViewController: UIViewController, UITextFieldDelegate, UIPickerView
                 "No destination entered", preferredStyle: UIAlertControllerStyle.alert)
             alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
             self.present(alertController, animated: true, completion: nil)
+            searchControllerDestination.searchBar.backgroundColor = customAlertRed()
             return
         }
             //sends alert if no origin entered
@@ -189,6 +196,8 @@ class NewRideViewController: UIViewController, UITextFieldDelegate, UIPickerView
             alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
             //self.presentViewController(alertController, animated: true, completion: nil)
             self.present(alertController, animated: true, completion: nil)
+            searchControllerOrigin.searchBar.backgroundColor = customAlertRed()
+            
             return
         }
         
@@ -232,12 +241,14 @@ class NewRideViewController: UIViewController, UITextFieldDelegate, UIPickerView
             newRideIsRequest = false
             rideBooleanButton.setImage(#imageLiteral(resourceName: "sidecargreen.png"), for: .normal)
             requestBooleanButton.setImage(#imageLiteral(resourceName: "thumb.png"), for: .normal)
-            
+            PassengersLabel.isHidden = false
         }
         if (isRide == false) {
             newRideIsRequest = true
             rideBooleanButton.setImage(#imageLiteral(resourceName: "sidecar.png"), for: .normal)
             requestBooleanButton.setImage(#imageLiteral(resourceName: "greenthumb.png"), for: .normal)
+            PassengersLabel.isHidden = true
+            PassengersLabel.text = "0"
             
         }
     }
@@ -326,7 +337,29 @@ class NewRideViewController: UIViewController, UITextFieldDelegate, UIPickerView
         }
     }
     
-
+    //MARK: –Stylistic Components
+    
+    func customBlue() ->UIColor {
+        return UIColor(colorLiteralRed: 125/255, green: 190/255, blue: 242/255, alpha: 1)
+    }
+    
+    func customAlertRed() ->UIColor {
+        return UIColor(colorLiteralRed: 1, green: 141/255, blue: 141/255, alpha: 1)
+    }
+    
+    func imageWithColor(color: UIColor) -> UIImage {
+        let rect = CGRect(origin: CGPoint(x: 0, y:0), size: CGSize(width: self.view.frame.width, height: 45))
+        UIGraphicsBeginImageContext(rect.size)
+        let context = UIGraphicsGetCurrentContext()!
+        
+        context.setFillColor(color.cgColor)
+        context.fill(rect)
+        
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return image!
+    }
     
     /*
     // MARK: - Navigation
@@ -346,7 +379,7 @@ class NewRideViewController: UIViewController, UITextFieldDelegate, UIPickerView
 extension NewRideViewController: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return passengerPickerDataSource[row]
+        return "\(row + 1)"
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -359,8 +392,7 @@ extension NewRideViewController: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         //pickerView.selectRow(row, inComponent: component , animated: true)
-        PassengersLabel.text = String(row)
-        print(row)
+        PassengersLabel.text = String(row + 1)
     }
     
 }
@@ -403,5 +435,6 @@ extension NewRideViewController: GMSAutocompleteResultsViewControllerDelegate {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
 }
+
 
 
