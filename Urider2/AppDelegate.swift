@@ -32,9 +32,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         GMSPlacesClient.provideAPIKey("AIzaSyBzG2AojBz9T4RJh9CnJDVPPM8Ut_Yt9-A")
         GMSServices.provideAPIKey("AIzaSyBzG2AojBz9T4RJh9CnJDVPPM8Ut_Yt9")
         
-        //var configureError: NSError?
-        //GGLContext.sharedInstance().configureWithError(&configureError)
-        //assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        //styling navigationbar
+        //styling view controller:
+        let navigationBarAppearace = UINavigationBar.appearance()
+        navigationBarAppearace.tintColor = UIColor.white
+        navigationBarAppearace.barTintColor = UIColor(colorLiteralRed: 061/255, green: 149/255, blue: 206/255, alpha: 1)
+        
+        
+        navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         return true
         
     }

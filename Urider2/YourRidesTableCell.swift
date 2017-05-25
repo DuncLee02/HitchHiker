@@ -22,6 +22,10 @@ class YourRidesTableCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        viewButton.layer.borderColor = UIColor.lightGray.cgColor
+        viewButton.layer.cornerRadius = 5
+        viewButton.layer.borderWidth = 1
+        
         // Initialization code
     }
     

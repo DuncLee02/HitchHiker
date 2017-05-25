@@ -96,6 +96,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
+      customArchiveName = "Urider2"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

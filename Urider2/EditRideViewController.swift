@@ -21,10 +21,6 @@ class EditRideViewController: UIViewController, UITextFieldDelegate, UIPickerVie
     var passengerPickerDataSource: [String]!
     
     var newRideIsRequest: Bool!
-    var rideTypeWasSet: Bool = true
-    var nonSmoking: Bool = true
-    var petsProhibited: Bool = true
-    var oneWayTrip: Bool = true
     
     var rideDest: CLLocationCoordinate2D!
     var rideOrig: CLLocationCoordinate2D!
@@ -52,8 +48,6 @@ class EditRideViewController: UIViewController, UITextFieldDelegate, UIPickerVie
     
     
     //labels
-    @IBOutlet weak var DestinationLabel: UITextField!
-    @IBOutlet weak var OriginLabel: UITextField!
     @IBOutlet weak var PassengersLabel: UITextField!
     @IBOutlet weak var TimeLabel: UITextField!
     @IBOutlet weak var DateLabel: UITextField!
@@ -63,9 +57,6 @@ class EditRideViewController: UIViewController, UITextFieldDelegate, UIPickerVie
     //switches and buttons
     @IBOutlet weak var rideBooleanButton: UIButton!
     @IBOutlet weak var requestBooleanButton: UIButton!
-    @IBOutlet weak var nonSmokingSwitch: UISwitch!
-    @IBOutlet weak var petsProhibitedSwitch: UISwitch!
-    @IBOutlet weak var oneWaySwitch: UISwitch!
     
     
     
@@ -76,8 +67,6 @@ class EditRideViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         DateLabel.delegate = self
         TimeLabel.delegate = self
         PassengersLabel.delegate = self
-        OriginLabel.delegate = self
-        DestinationLabel.delegate = self
         PassengersLabel.text = "0"
         
         rideOrig = rideBeingEdited.origCoordinates
@@ -90,28 +79,20 @@ class EditRideViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         
         
         if(rideBeingEdited.isPassenger == true) {
-            requestBooleanButton.setImage(#imageLiteral(resourceName: "checked.png"), for: .normal)
+            requestBooleanButton.setImage(#imageLiteral(resourceName: "greenthumb"), for: .normal)
             newRideIsRequest = true
         }
         else {
             newRideIsRequest = false
-            rideBooleanButton.setImage(#imageLiteral(resourceName: "checked.png"), for: .normal)
+            rideBooleanButton.setImage(#imageLiteral(resourceName: "sidecargreen"), for: .normal)
         }
-        
-        //other
-        backgroundOptionsLabel.layer.masksToBounds = true
-        backgroundOptionsLabel.layer.cornerRadius = 8
-        rideBooleanButton.layer.cornerRadius = 5
-        rideBooleanButton.layer.borderWidth = 1
-        rideBooleanButton.layer.borderColor = UIColor.blue.cgColor
-        requestBooleanButton.layer.cornerRadius = 5
-        requestBooleanButton.layer.borderWidth = 1
-        requestBooleanButton.layer.borderColor = UIColor.blue.cgColor
         
         //initialize GMSSearchBar
         resultsViewControllerOrigin = GMSAutocompleteResultsViewController()
         resultsViewControllerOrigin.delegate = self
         searchControllerOrigin = UISearchController(searchResultsController: resultsViewControllerOrigin)
+        searchControllerOrigin.searchBar.backgroundColor = customBlue()
+        searchControllerOrigin.searchBar.backgroundImage = UIImage()
         searchControllerOrigin.searchBar.text = rideBeingEdited.origin
         searchControllerOrigin.searchResultsUpdater = resultsViewControllerOrigin
         
@@ -124,6 +105,8 @@ class EditRideViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         resultsViewControllerDestination = GMSAutocompleteResultsViewController()
         resultsViewControllerDestination.delegate = self
         searchControllerDestination = UISearchController(searchResultsController: resultsViewControllerDestination)
+        searchControllerDestination.searchBar.backgroundColor = customBlue()
+        searchControllerDestination.searchBar.backgroundImage = UIImage()
         searchControllerDestination.searchBar.text = rideBeingEdited.destination
         searchControllerDestination.searchResultsUpdater = resultsViewControllerDestination
         
@@ -135,7 +118,7 @@ class EditRideViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         
         definesPresentationContext = true
         
-        passengerPickerDataSource = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
+        passengerPickerDataSource = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(EditRideViewController.dismissDateFieldPicker))
         self.view.addGestureRecognizer(tapGesture)
@@ -149,14 +132,14 @@ class EditRideViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         print("Action Recieved")
         //sends alert if no destination entered
         
-        if (rideTypeWasSet == false) {
-            print("ride type was not set")
-            let alertController = UIAlertController(title: "Can't submit", message:
-                "No ride-type checked", preferredStyle: UIAlertControllerStyle.alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
-            self.present(alertController, animated: true, completion: nil)
-            return
-        }
+//        if (rideTypeWasSet == false) {
+//            print("ride type was not set")
+//            let alertController = UIAlertController(title: "Can't submit", message:
+//                "No ride-type checked", preferredStyle: UIAlertControllerStyle.alert)
+//            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+//            self.present(alertController, animated: true, completion: nil)
+//            return
+//        }
         
         if searchControllerDestination.searchBar.text == "" {
             print("no destination entered")
@@ -196,8 +179,12 @@ class EditRideViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         rideBeingCreated.origin = searchControllerOrigin.searchBar.text
         rideBeingCreated.isPassenger = newRideIsRequest
         rideBeingCreated.time = TimeLabel.text
-        rideBeingCreated.oneWay = oneWayTrip
         
+        rideBeingCreated.creatorEmail = rideBeingEdited.creatorEmail
+        rideBeingCreated.creatorNumber = rideBeingEdited.creatorNumber
+        rideBeingCreated.creatorName = rideBeingEdited.creatorName
+        rideBeingCreated.creatorUID = rideBeingEdited.creatorUID
+    
 //        let aRideDict = [ "date": rideBeingEdited.date!, "destination": rideBeingEdited.destination!, "isPassenger": rideBeingEdited.isPassenger!, "seats": rideBeingEdited.seats!, "origin": rideBeingEdited.origin!, "time": rideBeingEdited.time!, "oneWay": oneWayTrip, "petsProhibited" : petsProhibited, "nonSmoking": nonSmoking] as [String : Any]
 //        print(aRideDict)
         
@@ -228,51 +215,20 @@ class EditRideViewController: UIViewController, UITextFieldDelegate, UIPickerVie
     
     
     func booleanButtonsPressed(isRide: Bool) {
-        rideTypeWasSet = true
         if (isRide == true) {
             newRideIsRequest = false
-            rideBooleanButton.setImage(#imageLiteral(resourceName: "checked.png"), for: .normal)
-            requestBooleanButton.setImage(nil, for: .normal)
-            
+            rideBooleanButton.setImage(#imageLiteral(resourceName: "sidecargreen"), for: .normal)
+            requestBooleanButton.setImage(#imageLiteral(resourceName: "thumb"), for: .normal)
         }
         if (isRide == false) {
+            requestBooleanButton.setImage(#imageLiteral(resourceName: "greenthumb"), for: .normal)
+            rideBooleanButton.setImage(#imageLiteral(resourceName: "sidecar"), for: .normal)
             newRideIsRequest = true
-            rideBooleanButton.setImage(nil, for: .normal)
-            requestBooleanButton.setImage(#imageLiteral(resourceName: "checked.png"), for: .normal)
-            
         }
     }
     
     
     //switch delegates
-    
-    @IBAction func nonSmokingSwitchValueChanged(_ sender: Any) {
-        if (nonSmokingSwitch.isOn) {
-            nonSmoking = true
-        }
-        else {
-            nonSmoking = false
-        }
-    }
-    
-    @IBAction func petsProhibitedSwitchValueChanged(_ sender: Any) {
-        if (petsProhibitedSwitch.isOn) {
-            petsProhibited = true
-        }
-        else {
-            petsProhibited = false
-        }
-    }
-    
-    
-    @IBAction func oneWaySwitchValueChanged(_ sender: Any) {
-        if (oneWaySwitch.isOn) {
-            oneWayTrip = true
-        }
-        else {
-            oneWayTrip = false
-        }
-    }
     
     
     // MARK: DatePicker Delegates
@@ -361,6 +317,13 @@ class EditRideViewController: UIViewController, UITextFieldDelegate, UIPickerVie
      // Pass the selected object to the new view controller.
      }
      */
+    
+    //MARK: –Stylistic Components
+    
+    func customBlue() ->UIColor {
+        return UIColor(colorLiteralRed: 125/255, green: 190/255, blue: 242/255, alpha: 1)
+    }
+
 
 }
 
@@ -392,8 +355,8 @@ extension EditRideViewController: GMSAutocompleteResultsViewControllerDelegate {
     // Handle the user's selection.
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController, didAutocompleteWith place: GMSPlace) {
         print("Place name: \(place.name)")
-        print("Place address: \(place.formattedAddress)")
-        print("Place attributions: \(place.attributions)")
+        print("Place address: \(String(describing: place.formattedAddress))")
+        print("Place attributions: \(String(describing: place.attributions))")
         if (resultsController == resultsViewControllerOrigin) {
             searchControllerOrigin.searchBar.text = place.formattedAddress!
             rideOrig = place.coordinate

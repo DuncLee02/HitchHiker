@@ -23,6 +23,9 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         static var email = ""
         static var defaultPlace: CLLocationCoordinate2D!
         static var defaultName = ""
+        static var phoneNumber = ""
+        static var acceptedRideKeys = [String]()
+        static var photo = UIImage()
     }
 
     @IBOutlet weak var SignInButton: GIDSignInButton!
@@ -99,7 +102,18 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         ref.child("usersDuncan").child(currentUser.uid).observeSingleEvent(of: .value, with: { (snapshot) in
             print(snapshot)
             if (snapshot.exists()) {
+                
+                
+                let keysnap = snapshot.childSnapshot(forPath: "accepted")
+                for children in keysnap.children.allObjects as! [FIRDataSnapshot] {
+                    currentUser.acceptedRideKeys.append(children.key)
+                    print("accepted ride keys..........")
+                    print(children.key)
+                }
+
+                
                 if let dictionary = snapshot.value as? [String: AnyObject] {
+                    currentUser.phoneNumber = dictionary["phoneNumber"] as! String
                     currentUser.email = dictionary["email"] as! String
                     currentUser.name = dictionary["name"] as! String
                     currentUser.school = dictionary["school"] as! String

@@ -26,7 +26,6 @@ class MapMarkerTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     var noRidesLabel = UILabel()
-    var directionFlipped = false
     var viewAll = false
     var searchBar: UISearchBar!
     
@@ -34,28 +33,11 @@ class MapMarkerTableViewController: UITableViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        searchBar = UISearchBar()
-//        searchBar.sizeToFit()
-//        searchBar.placeholder = "search for rides"
-//        searchBar.delegate = self
-        
-        
-        
-//        if (markerCity.currentCity.rideList.count == 0) {
-//            self.navigationItem.title = "No Rides Found"
-//        }
-        
         if (markerCity.subset == "View All") {
             markerCity.subset = "?"
             viewAll = true
         }
         
-        let nameArray1 = markerCity.currentCity.cityInfo.name.components(separatedBy: ",")
-        let nameArray2 = markerCity.subset.components(separatedBy: ",")
-        
-        self.navigationItem.title = nameArray1[0] + " -> " + nameArray2[0]
-//        self.tableView.tableHeaderView = flipButton
-//        flipButton.sizeToFit()
         self.tableView.tableHeaderView?.isOpaque = true
         self.tableView.tableHeaderView?.tintColor = #colorLiteral(red: 0.3485831618, green: 0.614120543, blue: 1, alpha: 0.6)
         
@@ -69,7 +51,7 @@ class MapMarkerTableViewController: UITableViewController, UISearchBarDelegate {
             return
         }
         
-        filterRides()
+        filterOutgoingRides()
     }
     
     
@@ -88,89 +70,47 @@ class MapMarkerTableViewController: UITableViewController, UISearchBarDelegate {
     // MARK: - Table view data source
     
     
-    func filterRides() {
+    func filterOutgoingRides() {
         
         let nameArray1 = markerCity.currentCity.cityInfo.name.components(separatedBy: ",")
         let nameArray2 = markerCity.subset.components(separatedBy: ",")
         
         if (viewAll == false) {
-            if (directionFlipped == false) {
-                self.navigationItem.title = nameArray1[0] + " -> " + nameArray2[0]
-                cellList = markerCity.currentCity.rideList.filter({ (someRide) -> Bool in
-                    if (someRide.destination == markerCity.subset) {
-                        return true
-                    }
-                    return false
-                })
-                
-                if (cellList.count == 0) {
-                    noRidesLabel.text = "No Rides Found"
+            self.navigationItem.title = nameArray1[0] + " -> " + nameArray2[0]
+            cellList = markerCity.currentCity.rideList.filter({ (someRide) -> Bool in
+                if (someRide.destination == markerCity.subset) {
+                    return true
                 }
-                else {
-                    noRidesLabel.text = ""
-                }
-                
-                self.tableView.reloadData()
+                return false
+            })
+            
+            if (cellList.count == 0) {
+                noRidesLabel.text = "No Rides Found"
+            }
+            else {
+                noRidesLabel.text = ""
             }
             
-            if (directionFlipped == true) {
-                self.navigationItem.title = nameArray2[0] + " -> " + nameArray1[0]
-                cellList = markerCity.currentCity.rideList.filter({ (someRide) -> Bool in
-                    if (someRide.origin == markerCity.subset) {
-                        return true
-                    }
-                    return false
-                })
-                
-                if (cellList.count == 0) {
-                    noRidesLabel.text = "No Rides Found"
-                }
-                else {
-                    noRidesLabel.text = ""
-                }
-                
-                self.tableView.reloadData()
-            }
+            self.tableView.reloadData()
         }
         
-        else {
-            if (directionFlipped == false) {
-                self.navigationItem.title = nameArray1[0] + " -> " + nameArray2[0]
-                cellList = markerCity.currentCity.rideList.filter({ (someRide) -> Bool in
-                    if (someRide.origin == markerCity.currentCity.cityInfo.name) {
-                        return true
-                    }
-                    return false
-                })
-                
-                if (cellList.count == 0) {
-                    noRidesLabel.text = "No Rides Found"
+        else { //  if viewAll == true
+            self.navigationItem.title = nameArray1[0] + " -> " + nameArray2[0]
+            cellList = markerCity.currentCity.rideList.filter({ (someRide) -> Bool in
+                if (someRide.origin == markerCity.currentCity.cityInfo.name) {
+                    return true
                 }
-                else {
-                    noRidesLabel.text = ""
-                }
-                
-                self.tableView.reloadData()
+                return false
+            })
+            
+            if (cellList.count == 0) {
+                noRidesLabel.text = "No Rides Found"
+            }
+            else {
+                noRidesLabel.text = ""
             }
             
-            if (directionFlipped == true) {
-                self.navigationItem.title = nameArray2[0] + " -> " + nameArray1[0]
-                cellList = markerCity.currentCity.rideList.filter({ (someRide) -> Bool in
-                    if (someRide.destination == markerCity.currentCity.cityInfo.name) {
-                        return true
-                    }
-                    return false
-                })
-                
-                if (cellList.count == 0) {
-                    noRidesLabel.text = "No Rides Found"
-                }
-                else {
-                    noRidesLabel.text = ""
-                }
-                
-                self.tableView.reloadData()
-            }
+            self.tableView.reloadData()
         }
         
     }
@@ -183,83 +123,41 @@ class MapMarkerTableViewController: UITableViewController, UISearchBarDelegate {
         let nameArray2 = markerCity.subset.components(separatedBy: ",")
         
         if (viewAll == false) {
-            if (directionFlipped == false) {
-                self.navigationItem.title = nameArray2[0] + " -> " + nameArray1[0]
-                cellList = markerCity.currentCity.rideList.filter({ (someRide) -> Bool in
-                    if (someRide.origin == markerCity.subset) {
-                        return true
-                    }
-                    return false
-                })
-                
-                if (cellList.count == 0) {
-                    noRidesLabel.text = "No Rides Found"
+            self.navigationItem.title = nameArray2[0] + " -> " + nameArray1[0]
+            cellList = markerCity.currentCity.rideList.filter({ (someRide) -> Bool in
+                if (someRide.origin == markerCity.subset) {
+                    return true
                 }
-                else {
-                    noRidesLabel.text = ""
-                }
-                
-                self.tableView.reloadData()
+                return false
+            })
+            
+            if (cellList.count == 0) {
+                noRidesLabel.text = "No Rides Found"
+            }
+            else {
+                noRidesLabel.text = ""
             }
             
-            if (directionFlipped == true) {
-                self.navigationItem.title = nameArray1[0] + " -> " + nameArray2[0]
-                cellList = markerCity.currentCity.rideList.filter({ (someRide) -> Bool in
-                    if (someRide.destination == markerCity.subset) {
-                        return true
-                    }
-                    return false
-                })
-                
-                if (cellList.count == 0) {
-                    noRidesLabel.text = "No Rides Found"
-                }
-                else {
-                    noRidesLabel.text = ""
-                }
-                
-                self.tableView.reloadData()
-            }
+            self.tableView.reloadData()
         }
             
         else {
-            if (directionFlipped == false) {
-                self.navigationItem.title = nameArray2[0] + " -> " + nameArray1[0]
-                cellList = markerCity.currentCity.rideList.filter({ (someRide) -> Bool in
-                    if (someRide.destination == markerCity.currentCity.cityInfo.name) {
-                        return true
-                    }
-                    return false
-                })
-                
-                if (cellList.count == 0) {
-                    noRidesLabel.text = "No Rides Found"
+            self.navigationItem.title = nameArray2[0] + " -> " + nameArray1[0]
+            cellList = markerCity.currentCity.rideList.filter({ (someRide) -> Bool in
+                if (someRide.destination == markerCity.currentCity.cityInfo.name) {
+                    return true
                 }
-                else {
-                    noRidesLabel.text = ""
-                }
-                
-                self.tableView.reloadData()
+                return false
+            })
+            
+            if (cellList.count == 0) {
+                noRidesLabel.text = "No Rides Found"
+            }
+            else {
+                noRidesLabel.text = ""
             }
             
-            if (directionFlipped == true) {
-                self.navigationItem.title = nameArray1[0] + " -> " + nameArray2[0]
-                cellList = markerCity.currentCity.rideList.filter({ (someRide) -> Bool in
-                    if (someRide.origin == markerCity.currentCity.cityInfo.name) {
-                        return true
-                    }
-                    return false
-                })
-                
-                if (cellList.count == 0) {
-                    noRidesLabel.text = "No Rides Found"
-                }
-                else {
-                    noRidesLabel.text = ""
-                }
-                
-                self.tableView.reloadData()
-            }
+            self.tableView.reloadData()
         }
         
     }
@@ -281,15 +179,9 @@ class MapMarkerTableViewController: UITableViewController, UISearchBarDelegate {
         
         cell.destinationLabel.text = cellList[indexPath.row].destination
         cell.startPointLabel.text = cellList[indexPath.row].origin
-        cell.numberSeatsLabel.text = "\(cellList[indexPath.row].seats! - (cellList[indexPath.row].riders?.count)!)"
+        cell.numberSeatsLabel.text = "\(cellList[indexPath.row].seats! - cellList[indexPath.row].seatsTaken!)"
         cell.dateLabel.text = cellList[indexPath.row].date
         cell.timeLabel.text = cellList[indexPath.row].time
-        
-        cell.viewButton.layer.cornerRadius = 5
-        cell.viewButton.layer.borderWidth = 1
-        cell.viewButton.layer.borderColor = UIColor.blue.cgColor
-        cell.backgroundColor = UIColor.white
-        
         
         if (cellList[indexPath.row].isPassenger == true) {
             cell.rideOrRequestIcon.image = #imageLiteral(resourceName: "PassengerIcon.png")
@@ -313,17 +205,7 @@ class MapMarkerTableViewController: UITableViewController, UISearchBarDelegate {
         self.performSegue(withIdentifier: "segueToViewRide", sender: self)
     }
     
-    //MARK: flipButton Delegates
-    
-    @IBAction func switchDirection(_ sender: Any) {
-        directionFlipped = !directionFlipped
-        if markerCity.Outgoing == true {
-            filterRides()
-            return
-        }
-        filterIngoingRides()
-                
-    }
+
     
     
 //    //MARK: searchbar delegates

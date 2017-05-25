@@ -11,7 +11,7 @@ import GooglePlaces
 import FirebaseAuth
 import FirebaseDatabase
 
-class UserInfoViewController: UIViewController {
+class UserInfoViewController: UIViewController, UITextFieldDelegate {
 
     
     //GMS SearchBar
@@ -19,10 +19,13 @@ class UserInfoViewController: UIViewController {
     var searchControllerOrigin: UISearchController!
     
     var defaultPlace: GMSPlace!
-
+    
+    @IBOutlet weak var phoneNumberTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        phoneNumberTextField.delegate = self
         
         //initialize autocomplete filter:
         let filter = GMSAutocompleteFilter()
@@ -47,8 +50,49 @@ class UserInfoViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    //MARK: Textfield Delegates
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+        let components = (newString as NSString).components(separatedBy: NSCharacterSet.decimalDigits.inverted)
+        
+        let decimalString = components.joined(separator: "") as NSString
+        let length = decimalString.length
+        let hasLeadingOne = length > 0 && decimalString.character(at: 0) == (1 as unichar)
+        
+        if length == 0 || (length > 10 && !hasLeadingOne) || length > 11 {
+            let newLength = (textField.text! as NSString).length + (string as NSString).length - range.length as Int
+            
+            return (newLength > 10) ? false : true
+        }
+        var index = 0 as Int
+        let formattedString = NSMutableString()
+        
+        if hasLeadingOne {
+            formattedString.append("1 ")
+            index += 1
+        }
+        if (length - index) > 3 {
+            let areaCode = decimalString.substring(with: NSMakeRange(index, 3))
+            formattedString.appendFormat("(%@) ", areaCode)
+            index += 3
+        }
+        if length - index > 3 {
+            let prefix = decimalString.substring(with: NSMakeRange(index, 3))
+            formattedString.appendFormat("%@-", prefix)
+            index += 3
+        }
+        
+        let remainder = decimalString.substring(from: index)
+        formattedString.append(remainder)
+        textField.text = formattedString as String
+        return false
+    }
+
+    
     
     @IBAction func nextButtonPressed(_ sender: Any) {
+        print("next button pressed...")
         if (searchControllerOrigin.searchBar.text == "") {
             print("no destination entered")
             let alertController = UIAlertController(title: "Can't submit", message:
@@ -56,6 +100,22 @@ class UserInfoViewController: UIViewController {
             alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
             self.present(alertController, animated: true, completion: nil)
             return
+        }
+        
+        var phoneNumber = "none"
+        
+        if (phoneNumberTextField.text != "") {
+            let onlyNums = phoneNumberTextField.text?.components(separatedBy: NSCharacterSet.decimalDigits.inverted).joined(separator: "")
+            if ((onlyNums?.characters.count)! < 10) {
+                print("not a full phone number")
+                let alertController = UIAlertController(title: "Can't submit", message:
+                    "10 digit phone number required", preferredStyle: UIAlertControllerStyle.alert)
+                alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+                self.present(alertController, animated: true, completion: nil)
+                return
+            }
+            print(onlyNums!)
+            phoneNumber = onlyNums!
         }
         
         
@@ -74,16 +134,24 @@ class UserInfoViewController: UIViewController {
         let indexOfEdu = school?.index( (school?.endIndex)! , offsetBy: -4 )
         school = school?.substring(to: (indexOfEdu)!)
         print(school!)
-        let dictionary = ["email": userEmail!, "school": school!, "name": name!, "lat": defaultPlace.coordinate.latitude, "lon": defaultPlace.coordinate.longitude, "defaultName": defaultPlace.name] as [String : Any]
+        
+        let nameArray = name?.components(separatedBy: " ")
+        var capitalizedName = ""
+        for components in nameArray! {
+            capitalizedName += components.capitalized + " "
+        }
+        let finalName = capitalizedName.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        
+        
+        let dictionary = ["email": userEmail!, "school": school!, "name": finalName, "lat": defaultPlace.coordinate.latitude, "lon": defaultPlace.coordinate.longitude, "defaultName": defaultPlace.name, "phoneNumber": phoneNumber] as [String : Any]
         print(dictionary)
         ref.child("usersDuncan").child(LoginViewController.currentUser.uid).setValue(dictionary)
+        LoginViewController.currentUser.phoneNumber = phoneNumber
         LoginViewController.currentUser.email = userEmail!
-        LoginViewController.currentUser.name = name!
+        LoginViewController.currentUser.name = capitalizedName
         LoginViewController.currentUser.school = school!
         LoginViewController.currentUser.defaultPlace = defaultPlace.coordinate
         self.performSegue(withIdentifier: "segueToMap", sender: self)
-        
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -110,8 +178,8 @@ extension UserInfoViewController: GMSAutocompleteResultsViewControllerDelegate {
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController, didAutocompleteWith place: GMSPlace) {
         
         print("Place name: \(place.name)")
-        print("Place address: \(place.formattedAddress)")
-        print("Place attributions: \(place.attributions)")
+        print("Place address: \(String(describing: place.formattedAddress))")
+        print("Place attributions: \(String(describing: place.attributions))")
         
         defaultPlace = place
         searchControllerOrigin.searchBar.text = place.formattedAddress

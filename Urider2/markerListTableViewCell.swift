@@ -19,7 +19,6 @@ class markerListTableViewCell: UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var viewButton: UIButton!
     
-    
     @IBOutlet weak var roundTripIcon: UIImageView!
     @IBOutlet weak var rideOrRequestIcon: UIImageView!
     
@@ -27,10 +26,10 @@ class markerListTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        
-        
-        
+        viewButton.layer.cornerRadius = 5
+        viewButton.layer.borderWidth = 1
+        viewButton.layer.borderColor = UIColor.lightGray.cgColor
+        backgroundColor = UIColor.white
     }
 
     

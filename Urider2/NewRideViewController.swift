@@ -30,13 +30,7 @@ class NewRideViewController: UIViewController, UITextFieldDelegate, UIPickerView
     
     var newRide: Ride!
     
-//    //GMS Page Variables
-//    var GMSResultsViewController: GMSAutocompleteViewController?
-//    var resultView: UITextView?
     var GMSWhichFieldTag: String! //to tag which textfield is being edited
-//    var destinationSearchController: UISearchController!
-//    var originSearchController: UISearchController?
-//    
     
    //GMS SearchBar
     var resultsViewControllerOrigin: GMSAutocompleteResultsViewController!
@@ -61,12 +55,11 @@ class NewRideViewController: UIViewController, UITextFieldDelegate, UIPickerView
     @IBOutlet weak var TimeLabel: UITextField!
     @IBOutlet weak var DateLabel: UITextField!
     @IBOutlet weak var AddRideButton: UIButton!
-    @IBOutlet weak var backgroundOptionsLabel: UILabel!
     
     //switches and buttons
     @IBOutlet weak var rideBooleanButton: UIButton!
     @IBOutlet weak var requestBooleanButton: UIButton!
-    @IBOutlet weak var oneWaySwitch: UISwitch!
+//    @IBOutlet weak var oneWaySwitch: UISwitch!
     
     @IBOutlet weak var backgroundAlertView: UIView!
     
@@ -89,11 +82,6 @@ class NewRideViewController: UIViewController, UITextFieldDelegate, UIPickerView
         dateFormatter.dateStyle = .short
         DateLabel.text = dateFormatter.string(from: date as Date)
         TimeLabel.text = "12:00 PM"
-        
-        //other
-        backgroundOptionsLabel.layer.masksToBounds = true
-        backgroundOptionsLabel.layer.cornerRadius = 8
-        
         
         
         //initialize autocomplete filter:
@@ -209,10 +197,6 @@ class NewRideViewController: UIViewController, UITextFieldDelegate, UIPickerView
         newRide.origin = searchControllerOrigin.searchBar.text
         newRide.isPassenger = newRideIsRequest
         newRide.time = TimeLabel.text
-        newRide.oneWay = oneWayTrip
-        
-        let aRideDict = [ "date": newRide.date!, "destination": newRide.destination!, "isPassenger": newRide.isPassenger!, "seats": newRide.seats!, "origin": newRide.origin!, "time": newRide.time!, "oneWay": oneWayTrip] as [String : Any]
-        print(aRideDict)
         
         self.performSegue(withIdentifier: "lastViewToAddRide", sender: self)
     }
@@ -253,14 +237,14 @@ class NewRideViewController: UIViewController, UITextFieldDelegate, UIPickerView
         }
     }
     
-    @IBAction func oneWaySwitchValueChanged(_ sender: Any) {
-        if (oneWaySwitch.isOn) {
-            oneWayTrip = true
-        }
-        else {
-            oneWayTrip = false
-        }
-    }
+//    @IBAction func oneWaySwitchValueChanged(_ sender: Any) {
+//        if (oneWaySwitch.isOn) {
+//            oneWayTrip = true
+//        }
+//        else {
+//            oneWayTrip = false
+//        }
+//    }
     
     // MARK: DatePicker Delegates
     
@@ -279,11 +263,8 @@ class NewRideViewController: UIViewController, UITextFieldDelegate, UIPickerView
             let aDatePicker = UIDatePicker()
             datePicker = aDatePicker
             datePicker.datePickerMode = UIDatePickerMode.time
-            let todaysDate = NSDate()
-            datePicker.minimumDate = todaysDate as Date
-            datePicker.minuteInterval = 15
+            datePicker.minuteInterval = 10
             textField.inputView = datePicker
-            //set initial value
             let formatter = DateFormatter()
             formatter.dateFormat = "hh:mm a"
             datePicker.date = formatter.date(from: "12:00 pm")!
@@ -340,25 +321,11 @@ class NewRideViewController: UIViewController, UITextFieldDelegate, UIPickerView
     //MARK: –Stylistic Components
     
     func customBlue() ->UIColor {
-        return UIColor(colorLiteralRed: 125/255, green: 190/255, blue: 242/255, alpha: 1)
+        return UIColor(colorLiteralRed: 88/255, green: 163/255, blue: 212/255, alpha: 1)
     }
     
     func customAlertRed() ->UIColor {
         return UIColor(colorLiteralRed: 1, green: 141/255, blue: 141/255, alpha: 1)
-    }
-    
-    func imageWithColor(color: UIColor) -> UIImage {
-        let rect = CGRect(origin: CGPoint(x: 0, y:0), size: CGSize(width: self.view.frame.width, height: 45))
-        UIGraphicsBeginImageContext(rect.size)
-        let context = UIGraphicsGetCurrentContext()!
-        
-        context.setFillColor(color.cgColor)
-        context.fill(rect)
-        
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return image!
     }
     
     /*
@@ -405,8 +372,8 @@ extension NewRideViewController: GMSAutocompleteResultsViewControllerDelegate {
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController, didAutocompleteWith place: GMSPlace) {
         
         print("Place name: \(place.name)")
-        print("Place address: \(place.formattedAddress)")
-        print("Place attributions: \(place.attributions)")
+        print("Place address: \(String(describing: place.formattedAddress))")
+        print("Place attributions: \(String(describing: place.attributions))")
         if (resultsController == resultsViewControllerOrigin) {
             newRide.origCoordinates = place.coordinate
             searchControllerOrigin.searchBar.text = place.formattedAddress!

@@ -11,4 +11,15 @@ import Foundation
 class Rider: NSObject {
     var email: String!
     var uid: String!
+    var name: String!
+    var number: String!
+    
+    init(name: String, email: String, uid: String, number: String) {
+        self.name = name
+        self.email = email
+        self.number = number
+        self.uid = uid
+    }
 }
+
+

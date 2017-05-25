@@ -10,7 +10,13 @@ import UIKit
 
 class riderInfoTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var numberLabel: UILabel!
+    
+    
+    var passenger: Rider!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

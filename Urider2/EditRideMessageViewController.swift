@@ -18,6 +18,7 @@ class EditRideMessageViewController: UIViewController, UITextViewDelegate {
     
     @IBOutlet weak var messageForRide: UITextView!
     @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var oneWaySwitch: UISwitch!
     
     
     override func viewDidLoad() {
@@ -55,8 +56,9 @@ class EditRideMessageViewController: UIViewController, UITextViewDelegate {
             
         }
         
+        print("email: " + rideBeingCreated.creatorEmail!)
         
-        let aRideDict = [ "date": rideBeingCreated.date!, "destination": rideBeingCreated.destination!, "isPassenger": rideBeingCreated.isPassenger!, "seats": rideBeingCreated.seats!, "origin": rideBeingCreated.origin!, "time": rideBeingCreated.time!, "oneWay": rideBeingCreated.oneWay!, "message": rideBeingCreated.message!, "seatsTaken": 0, "author": rideBeingCreated.author!, "origLat": rideBeingCreated.origCoordinates!.latitude as Double, "origLong": rideBeingCreated.origCoordinates!.longitude as Double,  "destLat": rideBeingCreated.destCoordinates!.latitude as Double, "destLong": rideBeingCreated.destCoordinates!.longitude as Double, "riders": riderDict, "UID": rideBeingCreated.creatorUID!] as [String : Any]
+        let aRideDict = [ "date": rideBeingCreated.date!, "destination": rideBeingCreated.destination!, "isPassenger": rideBeingCreated.isPassenger!, "seats": rideBeingCreated.seats!, "origin": rideBeingCreated.origin!, "time": rideBeingCreated.time!, "oneWay": oneWaySwitch.isOn, "message": rideBeingCreated.message!, "seatsTaken": rideBeingCreated.seatsTaken!, "origLat": rideBeingCreated.origCoordinates!.latitude as Double, "origLong": rideBeingCreated.origCoordinates!.longitude as Double,  "destLat": rideBeingCreated.destCoordinates!.latitude as Double, "destLong": rideBeingCreated.destCoordinates!.longitude as Double, "riders": riderDict, "creatorUID": rideBeingCreated.creatorUID!, "creatorName": rideBeingCreated.creatorName!, "creatorEmail": rideBeingCreated.creatorEmail!, "creatorNumber": rideBeingCreated.creatorNumber!] as [String : Any]
         
         editRide(RideDict: aRideDict)
         

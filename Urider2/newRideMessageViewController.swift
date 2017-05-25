@@ -16,7 +16,9 @@ class newRideMessageViewController: UIViewController, UITextViewDelegate {
     
     @IBOutlet weak var messageForRide: UITextView!
     @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var oneWaySwitch: UISwitch!
     
+    var oneWayTrip = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,15 +46,16 @@ class newRideMessageViewController: UIViewController, UITextViewDelegate {
     @IBAction func doneButtonPressed(_ sender: Any) {
         rideToBeAdded.message = messageForRide.text
         
-        let author = LoginViewController.currentUser.email
+        let name = LoginViewController.currentUser.name
         let UID = LoginViewController.currentUser.uid
+        let email = LoginViewController.currentUser.email
+        let number = LoginViewController.currentUser.phoneNumber
         
         
         //removed "riders" : ""
-        let aRideDict = [ "date": rideToBeAdded.date!, "destination": rideToBeAdded.destination!, "isPassenger": rideToBeAdded.isPassenger!, "seats": rideToBeAdded.seats!, "origin": rideToBeAdded.origin!, "time": rideToBeAdded.time!, "oneWay": rideToBeAdded.oneWay!, "message": rideToBeAdded.message!, "seatsTaken": 0, "author": author, "origLat": rideToBeAdded.origCoordinates!.latitude as Double, "origLong": rideToBeAdded.origCoordinates!.longitude as Double,  "destLat": rideToBeAdded.destCoordinates!.latitude as Double, "destLong": rideToBeAdded.destCoordinates!.longitude as Double, "UID": UID] as [String : Any]
+        let aRideDict = [ "date": rideToBeAdded.date!, "destination": rideToBeAdded.destination!, "isPassenger": rideToBeAdded.isPassenger!, "seats": rideToBeAdded.seats!, "origin": rideToBeAdded.origin!, "time": rideToBeAdded.time!, "oneWay": oneWayTrip, "message": rideToBeAdded.message!, "seatsTaken": 0, "origLat": rideToBeAdded.origCoordinates!.latitude as Double, "origLong": rideToBeAdded.origCoordinates!.longitude as Double,  "destLat": rideToBeAdded.destCoordinates!.latitude as Double, "destLong": rideToBeAdded.destCoordinates!.longitude as Double, "creatorUID": UID, "creatorName": name, "creatorEmail": email, "creatorNumber": number] as [String : Any]
         
         print(aRideDict)
-        
         writeToRides(RideDict: aRideDict)
         
         let alert = UIAlertController(title: "Ride Submitted!", message: "Thank you for submitting your ride!", preferredStyle: .alert)
@@ -119,6 +122,15 @@ class newRideMessageViewController: UIViewController, UITextViewDelegate {
         })
     }
 
+    
+    @IBAction func oneWaySwitchValueChanged(_ sender: Any) {
+        if (oneWaySwitch.isOn) {
+            oneWayTrip = true
+        }
+        else {
+            oneWayTrip = false
+        }
+    }
     
     
     func dismissKeyboard() {

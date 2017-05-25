@@ -66,7 +66,7 @@ class ViewYourRideViewController: UIViewController {
         
         if (isAcceptedRide == true) {
             EditRideButton.isHidden = true
-            viewRiderInfoButton.isHidden = true
+            viewRiderInfoButton.setTitle("View Driver Info", for: .normal)
             DeleteRideButton.setTitle("Remove Ride", for: .normal)
         }
 
@@ -74,11 +74,25 @@ class ViewYourRideViewController: UIViewController {
     }
     
     func removeSelfFromRide() {
-        ref.child("ridesDuncan").child(rideBeingViewed.destination!).child(rideBeingViewed.key!).child("riders").child(LoginViewController.currentUser.uid).removeValue()
-        ref.child("ridesDuncan").child(rideBeingViewed.origin!).child(rideBeingViewed.key!).child("riders").child(LoginViewController.currentUser.uid).removeValue()
         
+        rideBeingViewed.seatsTaken! -= 1
+//        ref.child("ridesDuncan").child(rideBeingViewed.destination!).child(rideBeingViewed.key!).child("riders").child(LoginViewController.currentUser.uid).removeValue()
+//        ref.child("ridesDuncan").child(rideBeingViewed.origin!).child(rideBeingViewed.key!).child("riders").child(LoginViewController.currentUser.uid).removeValue()
+        
+        //remove from rider list
         ref.child("userRides").child(rideBeingViewed.creatorUID!).child("posted").child(rideBeingViewed.key!).child("riders").child(LoginViewController.currentUser.uid).removeValue()
-        ref.child("userRides").child(rideBeingViewed.creatorUID!).child("accepted").child(rideBeingViewed.key!).removeValue()
+        ref.child("userRides").child(LoginViewController.currentUser.uid).child("accepted").child(rideBeingViewed.key!).removeValue()
+        //remove entry in accepted ridelist
+        ref.child("usersDuncan").child(rideBeingViewed.creatorUID!).child("accepted").child(rideBeingViewed.key!).removeValue()
+        let index = LoginViewController.currentUser.acceptedRideKeys.index(of: rideBeingViewed.key!)
+        LoginViewController.currentUser.acceptedRideKeys.remove(at: index!)
+        
+        //increment/decrement seatstaken
+        ref.child("ridesDuncan").child(rideBeingViewed.destination!).child(rideBeingViewed.key!).child("seatsTaken").setValue(rideBeingViewed.seatsTaken)
+        ref.child("ridesDuncan").child(rideBeingViewed.origin!).child(rideBeingViewed.key!).child("seatsTaken").setValue(rideBeingViewed.seatsTaken)
+        ref.child("userRides").child(rideBeingViewed.creatorUID!).child("posted").child(rideBeingViewed.key!).child("seatsTaken").setValue(rideBeingViewed.seatsTaken)
+        
+        YourRidesViewController.globalYourRideList.acceptedRideList.remove(at: YourRidesViewController.globalYourRideList.acceptedRideList.index(of: self.rideBeingViewed)!)
         
     }
 
@@ -115,25 +129,27 @@ class ViewYourRideViewController: UIViewController {
             alert.dismiss(animated: true, completion: nil)
             
             self.ref.child("ridesDuncan").child(self.rideBeingViewed.destination!).child(self.rideBeingViewed.key!).removeValue()
-            self.ref.child("ridesDuncan").child(self.rideBeingViewed.origin!).child(self.rideBeingViewed.key!).removeValue()
-            self.ref.child("userRides").child(LoginViewController.currentUser.uid).child("poster").child(self.rideBeingViewed.key!).removeValue()
+        self.ref.child("ridesDuncan").child(self.rideBeingViewed.origin!).child(self.rideBeingViewed.key!).removeValue()
+            
+        self.ref.child("userRides").child(LoginViewController.currentUser.uid).child("posted").child(self.rideBeingViewed.key!).removeValue()
             
             //removes all accepted rides
             for Riders in self.rideBeingViewed.riders! {
                 self.ref.child("userRides").child(Riders.uid).child("accepted").child(self.rideBeingViewed.key!).removeValue()
+                print("removing accepted ride...")
             }
             
-            //decrement city ridecounts
-            for cities in MapViewController.mapViewRideList.cityList {
-                if cities.cityInfo.name == self.rideBeingViewed.origin {
-                    print(self.rideBeingViewed.origin!)
-                    print(cities.cityInfo.numOrig)
-                    self.ref.child("locationsDuncan").child(self.rideBeingViewed.origin!).child("numOrig").setValue(cities.cityInfo.numOrig - 1)
-                }
-                if cities.cityInfo.name == self.rideBeingViewed.destination {
-                    self.ref.child("locationsDuncan").child(self.rideBeingViewed.destination!).child("numDest").setValue(cities.cityInfo.numDest - 1)
-                }
-            }
+//            //decrement city ridecounts
+//            for cities in MapViewController.mapViewRideList.cityList {
+//                if cities.cityInfo.name == self.rideBeingViewed.origin {
+//                    print(self.rideBeingViewed.origin!)
+//                    print(cities.cityInfo.numOrig)
+//                    self.ref.child("locationsDuncan").child(self.rideBeingViewed.origin!).child("numOrig").setValue(cities.cityInfo.numOrig - 1)
+//                }
+//                if cities.cityInfo.name == self.rideBeingViewed.destination {
+//                    self.ref.child("locationsDuncan").child(self.rideBeingViewed.destination!).child("numDest").setValue(cities.cityInfo.numDest - 1)
+//                }
+//            }
             
             //removes value from yourRidesList
             YourRidesViewController.globalYourRideList.yourRideList.remove(at: YourRidesViewController.globalYourRideList.yourRideList.index(of: self.rideBeingViewed)!)
@@ -150,6 +166,17 @@ class ViewYourRideViewController: UIViewController {
         alert.addAction(noAction)
         self.present(alert, animated: true, completion: nil)
     }
+    
+    @IBAction func viewRiderInfoButtonPressed(_ sender: Any) {
+        if (isAcceptedRide == true) {
+            self.performSegue(withIdentifier: "segueToDriverInfo", sender: self)
+            return
+        }
+        else {
+            self.performSegue(withIdentifier: "segueToViewRiders", sender: self)
+        }
+    }
+    
     
     @IBAction func editButtonPressed(_ sender: Any) {
         self.performSegue(withIdentifier: "segueToEditRide", sender: self)
@@ -173,6 +200,10 @@ class ViewYourRideViewController: UIViewController {
         
         if (segue.identifier == "segueToViewRiders") {
             let rideInfoVC: riderInfoViewController = segue.destination as! riderInfoViewController
+            rideInfoVC.ride = rideBeingViewed
+        }
+        if (segue.identifier == "segueToDriverInfo") {
+            let rideInfoVC: creatorInfoViewController = segue.destination as! creatorInfoViewController
             rideInfoVC.ride = rideBeingViewed
         }
     }
